@@ -2,6 +2,8 @@
 
 namespace iutnc\netvod\dispatch;
 
+use iutnc\netvod\action\ActionSignIn as ActionSignIn;
+
 class Dispatcher
 {
     private string $action;
