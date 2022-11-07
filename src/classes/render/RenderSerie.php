@@ -23,10 +23,12 @@ class RenderSerie implements Renderer
 
     private function renderCompact():string
     {
-        $html="<img src=".$this->serie->;
-
-
+        $html="<img src=".$this->serie->__get("cheminFichier")."   ".$this->serie->__get("titre");
         return $html;
-
     }
+    private function renderComplet():string
+    {
+        $html="<h1>Titre:</h1>".$this->serie->__get("titre")."<br>".
+            "<h2>genre:</h2>".$this->serie->__get("descriptif")."<br>";
+        return $html;
 }

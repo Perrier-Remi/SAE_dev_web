@@ -1,11 +1,9 @@
 <?php
-namespace iutnc\deefy\NetVOD;
+namespace iutnc\NetVOD\NetVOD;
 class Serie
 {
     protected string $titre;
-    protected string $genre;
     protected string $cheminImage;
-    protected string $public;
     protected string $descriptif;
     protected int $dateSortie;
     protected string $dateAjout;
@@ -13,8 +11,6 @@ class Serie
 
     /**
      * @param string $titre
-     * @param string $genre
-     * @param string $public
      * @param string $descriptif
      * @param int $dateSortie
      * @param string $dateAjout
@@ -23,8 +19,6 @@ class Serie
     public function __construct(string $titre, string $genre, string $public, string $descriptif, int $dateSortie, string $dateAjout, array $listeEpisode)
     {
         $this->titre = $titre;
-        $this->genre = $genre;
-        $this->public = $public;
         $this->descriptif = $descriptif;
         $this->dateSortie = $dateSortie;
         $this->dateAjout = $dateAjout;
