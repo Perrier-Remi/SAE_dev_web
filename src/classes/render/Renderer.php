@@ -4,5 +4,5 @@ namespace iutnc\netvod\render;
 
 interface Renderer
 {
-    public function render() : string ;
+    public function render($selector=0) : string ;
 }
