@@ -1,5 +1,5 @@
 <?php
-namespace iutnc\deefy\render;
+
 namespace iutnc\netvod\render;
 
 use iutnc\deefy\NetVOD\Serie;
