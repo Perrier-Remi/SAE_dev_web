@@ -16,7 +16,6 @@ arborescence
 
 /src
     /autoloader
-        Autoload
 
     /classes
         /action
