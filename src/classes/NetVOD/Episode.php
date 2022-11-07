@@ -1,5 +1,4 @@
 <?php
-namespace iutnc\deefy\NetVOD;
 
 namespace iutnc\netvod\NetVOD;
 
