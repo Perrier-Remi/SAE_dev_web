@@ -1,6 +1,6 @@
 <?php
 
-namespace SAE_dev_web\src\classes\bd\ConnectionFactory;
+namespace iutnc\netvod\bd;
 
 use PDO;
 

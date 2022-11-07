@@ -6,6 +6,8 @@ Yann : réalisation du squelette principal / structure application puis 5. Affic
 Rémi : réalisation du squelette principal / structure application puis 3. Affichage du catalogue de séries
 Thomas : 1. Identification/Authentification – Formulaire de login, 2. Inscription sur la plateforme
 
+base de donnée :
+    table avec id_user et id_série pour les séries likées et pour les séries en cours
 
 à faire :
 

@@ -1,5 +1,7 @@
 <?php
 
+namespace iutnc\netvod\NetVOD;
+
 class Episode
 {
     protected int $numero;

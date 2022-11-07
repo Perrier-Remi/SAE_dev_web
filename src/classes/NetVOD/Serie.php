@@ -1,5 +1,7 @@
 <?php
 
+namespace iutnc\netvod\NetVOD;
+
 class Serie
 {
     protected string $titre;
