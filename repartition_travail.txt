@@ -1,7 +1,7 @@
 Répartition du Travail
 
-Théo :
-Naël :
-Yann :
-Rémi :
-Thomas :
+Théo : 7. Page d’accueil d’un utilisateur : afficher ses séries préférées
+Naël : 4. Affichage détaillé d’une série et de la liste de ses épisodes
+Yann : réalisation du squelette principal puis 5. Affichage/visionnage d’un épisode d’une série
+Rémi : réalisation du squelette principal puis 3. Affichage du catalogue de séries
+Thomas : 1. Identification/Authentification – Formulaire de login, 2. Inscription sur la plateforme
