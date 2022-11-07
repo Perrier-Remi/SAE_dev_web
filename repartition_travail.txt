@@ -11,3 +11,48 @@ Thomas : 1. Identification/Authentification – Formulaire de login, 2. Inscript
 
 maquette du site / application
 CSS
+
+arborescence
+
+/src
+    /autoloader
+        Autoload
+
+    /classes
+        /action
+            ActionConnexion
+            ActionAccueil
+            ActionInscrire
+            ActionCatalogue
+            ActionSerie
+            ActionEpisode
+            ...
+
+        /authentification
+            Auth
+            User
+
+        /bd
+            ConnectionFactory
+            db.config.ini
+
+        /dispatch
+            Dispatcher
+
+        /exception
+            Exception1
+            Exception2
+            ...
+
+        /render
+            <<Interface>> Renderer
+            RenderEpisode
+            RenderSite
+
+        /NetVOD
+            /episode
+                Episode
+
+            /serie
+                Serie
+index.php
