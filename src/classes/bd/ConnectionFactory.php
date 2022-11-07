@@ -1,6 +1,6 @@
 <?php
 
-namespace iutnc\deefy\db;
+namespace SAE_dev_web\src\classes\bd\ConnectionFactory;
 
 use PDO;
 
