@@ -15,7 +15,7 @@ class RenderEpisode implements Renderer
     }
 
 
-    public function render(int $selector): string
+    public function render($selector=0): string
     {
         $html = "";
         // si on veut un affichage pour la série
