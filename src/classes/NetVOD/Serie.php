@@ -22,7 +22,7 @@ class Serie
         $this->descriptif = $descriptif;
         $this->dateSortie = $dateSortie;
         $this->dateAjout = $dateAjout;
-        $this->listeEpisode = $listeEpisode;
+
     }
 
 
