@@ -2,12 +2,13 @@
 
 namespace iutnc\netvod\authentification;
 
-use SAE_dev_web\src\classes\bd\ConnectionFactory;
-use SAE_dev_web\src\classes\authentification\User;
-//use iutnc\deefy\exception\AuthException;
+use iutnc\netvod\exception\AuthException as AuthException;
+use iutnc\netvod\bd\ConnectionFactory as ConnectionFactory;
+use iutnc\netvod\authentification\User as User;
 
 class Auth
 {
+
 
     public static function authenticate(string $email, string $hpassword): mixed
     {
@@ -29,19 +30,20 @@ class Auth
         return $retour;
     }
 
-    public static function loadProfile( string $email):void {
-        $query="select * from user where email = ?";
+
+    public static function loadProfile(string $email) {
+        $q = "select * from user where email = ?";
         ConnectionFactory::setConfig('src/classes/bd/db.config.ini');
-        $bd = ConnectionFactory::makeConnection();
+        $db = ConnectionFactory::makeConnection();
 
-        $stmt=$bd->prepare($query);
+        $stmt = $db->prepare($q);
         $res = $stmt->execute([$email]);
-        if (!$res) throw new AuthException("auth error : db query failed");
+        if (!$res) throw new AuthException("auth error sur query");
 
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $userDB = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-        if (!$user) throw new AuthException("auth failed : profile not found");
-        $user = new User($email, $user['passwd']);
+        if (!$userDB) throw new AuthException("profile not found");
+        $user = new User($email, $userDB['passhash']);
         $_SESSION['user'] = serialize($user);
     }
 
