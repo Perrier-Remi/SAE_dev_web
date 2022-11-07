@@ -1,0 +1,10 @@
+{
+  "autoload": {
+    "psr-4": {
+      "iutnc\\netvod\\": "src/classes"
+    }
+  },
+  "require": {
+    "ext-pdo": "*"
+  }
+}

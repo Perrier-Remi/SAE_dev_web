@@ -1,9 +1,8 @@
 <?php
 
-namespace SAE_dev_web\src\classes\authentification\user;
+namespace iutnc\netvod\authentification;
 
-class user
-{
+class user {
     public string $email;
     public string $hpassword;
 
