@@ -46,7 +46,8 @@ arborescence
         /render
             <<Interface>> Renderer
             RenderEpisode
-            RenderSite
+            RenderSerie
+            RenderCatalogue
 
         /NetVOD
             /episode
