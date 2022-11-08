@@ -19,6 +19,7 @@ class ActionSignIn extends Action
             <input type=\"password\" placeholder=\"*****\" name=\"pswd\">
             <div style=\"text-align: center\"> 
             <button type=\"submit\" name=\"connexion\" value=\"vrai\"> Connexion </button> </div>
+            <a href='index.php?action=add-user'>s'inscrire</a>
             </form>";
         } else {
             try {

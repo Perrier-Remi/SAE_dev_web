@@ -65,6 +65,14 @@ class Dispatcher
         <link rel=\"stylesheet\" href=\"style.css\">
         </head>
         <body>
+            <center>
+            <form name='menu' action='' method='post'>
+                <button formaction='index.php?action=accueil'>Accueil</button>
+                <button formaction='index.php?action=catalogue'>Catalogue</button>
+                <button formaction='index.php?action=deconnecter'>Deconnecter</button>
+            </form>
+            </center><br><br>
+        
             $html
         </body>
         </html>
