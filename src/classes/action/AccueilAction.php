@@ -23,7 +23,7 @@ class AccueilAction extends Action
             $result = $db->prepare($query);
             $user = unserialize($_SESSION['user']);
             $result->execute([$user->__get('id')]);
-            echo $_SESSION['user']; // tout le user or on ne veut que l id
+            $retour .= "<form id='accueil' method='post' enctype='multipart/form-data' action = ''>";
             while($datas = $result->fetch(\PDO::FETCH_ASSOC)) {
                 // creer series
                 $id_serie = $datas['id_serie'];
@@ -37,7 +37,7 @@ class AccueilAction extends Action
                 $retour .= "<li><button formaction='index.php?action=serie&id=$id_serie'>$data</button></li>";
             }
             $result->closeCursor();
-            $retour .= '</center></ul>';
+            $retour .= '</fom></center></ul>';
 
         }
         return $retour;

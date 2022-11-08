@@ -2,7 +2,7 @@
 
 namespace iutnc\netvod\dispatch;
 
-use iutnc\deefy\action\ActionCatalogue;
+use iutnc\netvod\action\ActionCatalogue;
 use iutnc\netvod\action\AccueilAction;
 use iutnc\netvod\action\ActionInscription;
 use iutnc\netvod\action\ActionSerie;
@@ -31,7 +31,7 @@ class Dispatcher
                 $act = new ActionSignIn();
                 $this->renderPage($act->execute());
                 break;
-            case 'acceuil':
+            case 'accueil':
                 $act = new AccueilAction();
                 $this->renderPage($act->execute());
                 break;
@@ -53,7 +53,7 @@ class Dispatcher
     {
         print(
         <<<end
-        ("<html lang=\"fr\">
+        <html lang=\"fr\">
         <head>
         <meta charset=\"utf-8\">
         <title>TD 15</title>
