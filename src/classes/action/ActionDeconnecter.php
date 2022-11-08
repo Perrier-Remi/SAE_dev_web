@@ -8,6 +8,7 @@ class ActionDeconnecter extends Action
     public function execute(): string
     {
         session_destroy();
-        return 'deconnecter';
+        $retour = "<center>utilisateur déconnecté </center>";
+        return $retour;
     }
 }
