@@ -4,6 +4,7 @@ namespace iutnc\netvod\dispatch;
 
 use iutnc\netvod\action\ActionCatalogue;
 use iutnc\netvod\action\AccueilAction;
+use iutnc\netvod\action\ActionEpisode;
 use iutnc\netvod\action\ActionInscription;
 use iutnc\netvod\action\ActionSerie;
 use iutnc\netvod\action\ActionSignIn as ActionSignIn;
@@ -43,6 +44,10 @@ class Dispatcher
                 $act = new ActionSerie();
                 $this->renderPage($act->execute());
                 break;
+            case 'episode':
+                $act = new ActionEpisode();
+                $this->renderPage($act->execute());
+                break;
             default:
                 $this->renderPage("<div style=\"text-align: center;\"> Bonjour! </div>");
                 break;
@@ -56,10 +61,19 @@ class Dispatcher
         <html lang=\"fr\">
         <head>
         <meta charset=\"utf-8\">
-        <title>TD 15</title>
+        <title>NetVod</title>
         <link rel=\"stylesheet\" href=\"style.css\">
         </head>
         <body>
+            <center>
+            <h1>NETVOD</h1>
+            <form name='menu' action='' method='post'>
+                <button formaction='index.php?action=accueil'>Accueil</button>
+                <button formaction='index.php?action=catalogue'>Catalogue</button>
+                <button formaction='index.php?action=deconnecter'>Deconnecter</button>
+            </form>
+            </center><br><br>
+        
             $html
         </body>
         </html>
