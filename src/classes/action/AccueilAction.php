@@ -5,6 +5,7 @@ namespace iutnc\netvod\action;
 
 use iutnc\netvod\NetVOD\Serie;
 use iutnc\netvod\render\RenderSerie;
+use iutnc\netvod\bd\ConnectionFactory;
 
 class AccueilAction extends Action
 {
@@ -18,9 +19,11 @@ class AccueilAction extends Action
                end;
         if (isset($_SESSION['user'])){
             $db = ConnectionFactory::makeConnection();
-            $query ="SELECT * FROM useraime WHERE id=?";
+            $query ="SELECT * FROM useraime WHERE id_user=?";
             $result = $db->prepare($query);
-            $result->execute([$_SESSION['user']]);
+            $user = unserialize($_SESSION['user']);
+            $result->execute([$user->__get('id')]);
+            echo $_SESSION['user']; // tout le user or on ne veut que l id
             while($datas = $result->fetch(\PDO::FETCH_ASSOC)) {
                 // creer series
                 $id_serie = $datas['id_serie'];
@@ -28,7 +31,7 @@ class AccueilAction extends Action
                 $result2 = $db->prepare($query2);
                 $result2->execute([$id_serie]);
                 $res = $result2->fetch(\PDO::FETCH_ASSOC);
-                $serie = new Serie($res['titre'],$res['img'],$res['descriptif'],$res['annee'],$res['date_ajout']);
+                $serie = new Serie($res['titre'],$res['img'],$res['descriptif'],$res['annee'],$res['date_ajout'],$id_serie);
                 $render = new RenderSerie($serie);
                 $data = $render->render();
                 $retour .= "<li><button formaction='index.php?action=serie&id=$id_serie'>$data</button></li>";
