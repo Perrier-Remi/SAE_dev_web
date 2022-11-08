@@ -12,12 +12,13 @@ class ActionCatalogue extends Action
 
     public function execute(): string
     {
-        $html = "";
+        $html = "<link rel='stylesheet' href='../styles/styleAction.css'/>";
         
             $db = ConnectionFactory::makeConnection();
             $query ="SELECT * FROM serie ";
             $result = $db->prepare($query);
             $result->execute();
+            $html .= "<body>";
             $html .= "<form id='accueil' method='post' enctype='multipart/form-data' action = ''>";
             while($datas = $result->fetch(\PDO::FETCH_ASSOC)) {
                 $serie = new Serie($datas['titre'],$datas['img'],$datas['descriptif'],$datas['annee'],$datas['date_ajout'],$datas['id']);
@@ -27,7 +28,7 @@ class ActionCatalogue extends Action
                 $html .= "<li><button formaction='index.php?action=serie&id=$id_serie'>$data</button></li>";
             }
         $result->closeCursor();
-        $html.= '</form></center></ul>';
+        $html.= '</form></center></ul> </body>';
 
         return $html;
     }
