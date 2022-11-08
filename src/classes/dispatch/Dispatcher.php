@@ -56,11 +56,12 @@ class Dispatcher
         <html lang=\"fr\">
         <head>
         <meta charset=\"utf-8\">
-        <title>TD 15</title>
+        <title>NetVod</title>
         <link rel=\"stylesheet\" href=\"style.css\">
         </head>
         <body>
             <center>
+            <h1>NETVOD</h1>
             <form name='menu' action='' method='post'>
                 <button formaction='index.php?action=accueil'>Accueil</button>
                 <button formaction='index.php?action=catalogue'>Catalogue</button>
