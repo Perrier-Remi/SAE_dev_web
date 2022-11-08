@@ -2,7 +2,10 @@
 
 namespace iutnc\netvod\dispatch;
 
+use iutnc\netvod\action\ActionCatalogue;
+use iutnc\netvod\action\AccueilAction;
 use iutnc\netvod\action\ActionInscription;
+use iutnc\netvod\action\ActionSerie;
 use iutnc\netvod\action\ActionSignIn as ActionSignIn;
 
 class Dispatcher
@@ -17,7 +20,8 @@ class Dispatcher
         $this->action = $action;
     }
 
-    public function run() : void {
+    public function run(): void
+    {
         switch ($this->action) {
             case 'add-user':
                 $act = new ActionInscription();
@@ -27,14 +31,29 @@ class Dispatcher
                 $act = new ActionSignIn();
                 $this->renderPage($act->execute());
                 break;
+            case 'accueil':
+                $act = new AccueilAction();
+                $this->renderPage($act->execute());
+                break;
+            case 'catalogue':
+                $act = new ActionCatalogue();
+                $this->renderPage($act->execute());
+                break;
+            case 'serie':
+                $act = new ActionSerie();
+                $this->renderPage($act->execute());
+                break;
             default:
                 $this->renderPage("<div style=\"text-align: center;\"> Bonjour! </div>");
                 break;
         }
     }
 
-    public function renderPage(string $html) : void {
-        print("<html lang=\"fr\">
+    public function renderPage(string $html): void
+    {
+        print(
+        <<<end
+        <html lang=\"fr\">
         <head>
         <meta charset=\"utf-8\">
         <title>TD 15</title>
@@ -43,7 +62,9 @@ class Dispatcher
         <body>
             $html
         </body>
-        </html>");
+        </html>
+        end);
+
     }
 
 

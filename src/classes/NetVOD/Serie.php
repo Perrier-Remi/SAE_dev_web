@@ -2,6 +2,8 @@
 
 namespace iutnc\netvod\NetVOD;
 
+use iutnc\netvod\bd\ConnectionFactory;
+
 class Serie
 {
     protected string $titre;
@@ -11,6 +13,7 @@ class Serie
     protected int $dateSortie;
     protected string $dateAjout;
     protected array $listeEpisode;
+    protected string $cheminImage;
 
     /**
      * @param string $titre
@@ -20,15 +23,22 @@ class Serie
      * @param int $dateSortie
      * @param string $dateAjout
      */
-    public function __construct(string $titre, string $genre='action', string $public, string $descriptif, int $dateSortie, string $dateAjout)
+    public function __construct(string $titre, string $cheminImage, string $descriptif, int $dateSortie, string $dateAjout,string $id_serie)
     {
         $this->titre = $titre;
-        $this->genre = $genre;
-        $this->public = $public;
+        $this->cheminImage=$cheminImage;
         $this->descriptif = $descriptif;
         $this->dateSortie = $dateSortie;
         $this->dateAjout = $dateAjout;
+        $this->generateListeEpisodes($id_serie);
 
+    }
+    public function generateListeEpisodes($id_serie){
+        $db = ConnectionFactory::makeConnection();
+        $query2 = "SELECT * FROM episode WHERE serie_id=?";
+        $result2 = $db->prepare($query2);
+        $result2->execute([$id_serie]);
+        $res = $result2->fetch(\PDO::FETCH_ASSOC);
     }
 
 

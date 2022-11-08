@@ -15,14 +15,14 @@ class Auth
         ConnectionFactory::setConfig('src/classes/bd/db.config.ini');
         $bdd = ConnectionFactory::makeConnection();
 
-        $requete = $bdd->prepare("select passhash from user where email=?");
+        $requete = $bdd->prepare("select passhash,id from user where email=?");
         $requete->bindParam(1, $email);
         $requete->execute();
 
-        $resultat = $requete->fetch()[0];
+        $resultat = $requete->fetch();
 
-        if (password_verify($hpassword, $resultat)) {
-            $retour = new User($email, $resultat);
+        if (password_verify($hpassword, $resultat[0])) {
+            $retour = new User($email, $resultat[0], $resultat[1]);
             self::loadProfile($email);
         } else {
             $retour = null;
@@ -43,7 +43,7 @@ class Auth
         $userDB = $stmt->fetch(\PDO::FETCH_ASSOC);
 
         if (!$userDB) throw new AuthException("profile not found");
-        $user = new User($email, $userDB['passhash']);
+        $user = new User($email, $userDB['passhash'], $userDB['id']);
         $_SESSION['user'] = serialize($user);
     }
 

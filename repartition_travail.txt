@@ -13,5 +13,8 @@ base de donnée :
 
 à faire :
 
+changement user possede un id
+connexion automatique apres inscription
+
 maquette du site / application
 (CSS ?)
