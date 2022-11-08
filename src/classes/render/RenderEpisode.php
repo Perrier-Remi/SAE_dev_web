@@ -25,9 +25,9 @@ class RenderEpisode implements Renderer
         if ($selector === 1) {
             $html = "<p> Episode". $this->episode->__get('numero')." : ". $this->episode->__get('titre')." </p>";
         } else {
-            $html = "<div style=\"text-align:center\">". $this->episode->__get('titre')." </div>
-             <div style=\"text-align:center\">". $this->episode->__get('resume')." </div>
-             <div style=\"text-align:center\">". $this->episode->__get('duree')." secondes </div>
+            $html = "<div style=\"text-align:center\"><h1>". $this->episode->__get('titre')." </h1></div> <br> <br>
+             <div style=\"text-align:center\">". $this->episode->__get('resume')." </div> <br>
+             <div style=\"text-align:center\">". $this->episode->__get('duree')." secondes </div> <br>
              <div style=\"text-align:center\"> <video controls width='600'> <source src='video/". $this->episode->__get('cheminFich')."'> </video> </div>";
         }
         return $html;
