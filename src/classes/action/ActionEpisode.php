@@ -22,6 +22,18 @@ class ActionEpisode extends Action
             } catch (\Exception $e) {
                 $html .= "<p> Connection à la base de données impossible</p>";
             }
+
+            $serie_stmt = $db->prepare("SELECT serie_id FROM episode where id=?");
+            $serie_stmt->execute([$_GET['id_episode']]);
+            $id_serie = $serie_stmt->fetch()[0];
+            $stmt_encours = $db->prepare("INSERT INTO serieEnCours(id_user, id_serie) VALUES (?,?)");
+            try {
+                $stmt_encours->execute([$_GET['id_episode'], $id_serie]);
+            } catch (\Exception $e) {
+                $html .= "<p> Problème dans la requête SQL </p>";
+            }
+
+
             $stmt = $db->prepare("SELECT * FROM episode WHERE id = ?");
             $stmt->execute([$_GET['id_episode']]);
             $donnees = $stmt->fetch();
