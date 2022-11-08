@@ -21,14 +21,22 @@ class Serie
      * @param int $dateSortie
      * @param string $dateAjout
      */
-    public function __construct(string $titre, string $cheminImage, string $descriptif, int $dateSortie, string $dateAjout)
+    public function __construct(string $titre, string $cheminImage, string $descriptif, int $dateSortie, string $dateAjout,string $id_serie)
     {
         $this->titre = $titre;
         $this->cheminImage=$cheminImage;
         $this->descriptif = $descriptif;
         $this->dateSortie = $dateSortie;
         $this->dateAjout = $dateAjout;
+        $this->generateListeEpisodes($id_serie);
 
+    }
+    public function generateListeEpisodes($id_serie){
+        $db = ConnectionFactory::makeConnection();
+        $query2 = "SELECT * FROM episode WHERE serie_id=?";
+        $result2 = $db->prepare($query2);
+        $result2->execute([$id_serie]);
+        $res = $result2->fetch(\PDO::FETCH_ASSOC);
     }
 
 
