@@ -24,11 +24,11 @@ class AccueilAction extends Action
             while($datas = $result->fetch(\PDO::FETCH_ASSOC)) {
                 // creer series
                 $id_serie = $datas['id_serie'];
-                $query2 ="SELECT * FROM useraime WHERE id=?";
+                $query2 ="SELECT * FROM serie WHERE id=?";
                 $result2 = $db->prepare($query2);
                 $result2->execute([$id_serie]);
                 $res = $result2->fetch(\PDO::FETCH_ASSOC);
-                $serie = new Serie($res['titre'],'action','adultes',$res['descriptif'],$res['annee'],$res['date_ajout']);
+                $serie = new Serie($res['titre'],$res['img'],$res['descriptif'],$res['annee'],$res['date_ajout']);
                 $render = new RenderSerie($serie);
                 $data = $render->render();
                 $retour .= "<li><button formaction='index.php?action=serie&id=$id_serie'>$data</button></li>";

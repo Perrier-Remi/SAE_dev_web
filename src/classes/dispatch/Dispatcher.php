@@ -2,6 +2,8 @@
 
 namespace iutnc\netvod\dispatch;
 
+use iutnc\deefy\action\ActionCatalogue;
+use iutnc\netvod\action\AccueilAction;
 use iutnc\netvod\action\ActionInscription;
 use iutnc\netvod\action\ActionSignIn as ActionSignIn;
 
@@ -25,6 +27,14 @@ class Dispatcher
                 break;
             case 'sign-in':
                 $act = new ActionSignIn();
+                $this->renderPage($act->execute());
+                break;
+            case 'acceuil':
+                $act=new AccueilAction();
+                $this->renderPage($act->execute());
+                break;
+                case 'catalogue':
+                $act=new ActionCatalogue();
                 $this->renderPage($act->execute());
                 break;
             default:
