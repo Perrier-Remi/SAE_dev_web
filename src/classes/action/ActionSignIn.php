@@ -23,10 +23,19 @@ class ActionSignIn extends Action
             </form>";
         } else {
             try {
-                Auth::authenticate($_POST['email'], $_POST['pswd']);
+                if (! filter_var($_POST['email'], FILTER_SANITIZE_EMAIL) ) {
+                    throw new AuthException("email invalide");
+                }
+                if (! filter_var($_POST['pswd'], FILTER_SANITIZE_STRING) ) {
+                    throw new AuthException("mot de passe invalide");
+                }
+                $mail = $_POST['email'];
+                $password = $_POST['pswd'];
+                Auth::authenticate($mail, $password);
                 $html = "<p> Connexion réussie </p>";
             } catch (AuthException $e) {
-                $html = "<p> Erreur dans l'email ou le mot de passe </p>";
+                $message = $e->getMessage();
+                $html = "<p>$message</p>";
             }
         }
         return $html;

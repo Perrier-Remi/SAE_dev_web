@@ -18,3 +18,5 @@ connexion automatique apres inscription
 
 maquette du site / application
 (CSS ?)
+
+sanitizer les inputs pour la tâche 1 et 2
