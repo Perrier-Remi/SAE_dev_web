@@ -33,9 +33,7 @@ class ActionSignIn extends Action
                 $html = "<p> Connexion réussie </p>";
             } catch (AuthException $e) {
                 $message = $e->getMessage();
-                $html .= <<< END
-                    <p>$message</p>
-                END;
+                $html .= "<p>$message</p>";
             }
         }
         return $html;
