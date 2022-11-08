@@ -25,7 +25,7 @@ class Auth
             $retour = new User($email, $resultat[0], $resultat[1]);
             self::loadProfile($email);
         } else {
-            $retour = null;
+            throw new AuthException("email ou mot de passe invalide");
         }
         return $retour;
     }

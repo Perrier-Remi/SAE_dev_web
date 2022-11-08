@@ -17,12 +17,23 @@ class ActionInscription extends Action {
             <input type=\"password\" placeholder=\"mot de passe\" name=\"pswd\">
             <input type=\"password\" placeholder=\"confirmez le mot de passe\" name=\"pswd_confirm\">
             <div style=\"text-align: center\"> 
-            <button type=\"submit\" name=\"connexion\" value=\"vrai\"> Register </button> </div>
+            <button type=\"submit\" name=\"connexion\" value=\"vrai\"> Inscription </button> </div>
             </form>";
         } else {
             try {
-                //sanitizer les input
-                Auth::register($_POST['email'], $_POST['pswd'], $_POST['pswd_confirm']);
+                if (! filter_var($_POST['email'], FILTER_SANITIZE_EMAIL) ) {
+                    throw new AuthException("email invalide");
+                }
+                if (! filter_var($_POST['pswd'], FILTER_SANITIZE_STRING) ) {
+                    throw new AuthException("mot de passe invalide");
+                }
+                if (! filter_var($_POST['pswd_confirm'], FILTER_SANITIZE_STRING) ) {
+                    throw new AuthException("mot de passe de confirmation invalide");
+                }
+                $mail = $_POST['email'];
+                $password = $_POST['pswd'];
+                $password_confirm = $_POST['pswd_confirm'];
+                Auth::register($mail, $password, $password_confirm);
                 $html = "<p> Compte crée avec succès </p>";
             } catch (AuthException $e) {
                 $message = $e->getMessage();

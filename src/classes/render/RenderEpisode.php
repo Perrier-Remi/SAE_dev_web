@@ -2,9 +2,12 @@
 
 namespace iutnc\netvod\render;
 
+require_once 'src/classes/NetVOD/Episode.php';
+use iutnc\netvod\NetVOD\Episode;
+
 class RenderEpisode implements Renderer
 {
-    private \Episode $episode;
+    private Episode $episode;
 
     /**
      * @param $episode
@@ -24,9 +27,13 @@ class RenderEpisode implements Renderer
         } else {
             $html = "<div style=\"text-align:center\">". $this->episode->__get('titre')." </div>
              <div style=\"text-align:center\">". $this->episode->__get('resume')." </div>
-             <div style=\"text-align:center\">". $this->episode->__get('titre')." secondes </div>
-             <div style=\"text-align:center\"> <video controls width='600'> <source src='". $this->episode->__get('cheminFich')."'> </video> </div>";
+             <div style=\"text-align:center\">". $this->episode->__get('duree')." secondes </div>
+             <div style=\"text-align:center\"> <video controls width='600'> <source src='video/". $this->episode->__get('cheminFich')."'> </video> </div>";
         }
         return $html;
     }
+
+
+
+
 }
