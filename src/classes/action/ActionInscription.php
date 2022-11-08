@@ -17,7 +17,7 @@ class ActionInscription extends Action {
             <input type=\"password\" placeholder=\"mot de passe\" name=\"pswd\">
             <input type=\"password\" placeholder=\"confirmez le mot de passe\" name=\"pswd_confirm\">
             <div style=\"text-align: center\"> 
-            <button type=\"submit\" name=\"connexion\" value=\"vrai\"> Register </button> </div>
+            <button type=\"submit\" name=\"connexion\" value=\"vrai\"> Inscription </button> </div>
             </form>";
         } else {
             try {
