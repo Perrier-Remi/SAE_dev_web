@@ -13,6 +13,9 @@ if (isset($_GET['action'])) {
 } else {
     $action = "";
 }
+if (!isset($_SESSION['user']) && $action != 'add-user'){
+    $action = 'sign-in';
+}
 
 $dispatcher = new Dispatcher($action);
 $dispatcher->run();

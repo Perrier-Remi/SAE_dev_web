@@ -13,7 +13,7 @@ class ActionCatalogue extends Action
     public function execute(): string
     {
         $html = "";
-        
+
             $db = ConnectionFactory::makeConnection();
             $query ="SELECT * FROM serie ";
             $result = $db->prepare($query);
