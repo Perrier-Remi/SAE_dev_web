@@ -2,6 +2,7 @@
 
 namespace iutnc\netvod\dispatch;
 
+use iutnc\netvod\action\ActionInscription;
 use iutnc\netvod\action\ActionSignIn as ActionSignIn;
 
 class Dispatcher
@@ -19,7 +20,7 @@ class Dispatcher
     public function run() : void {
         switch ($this->action) {
             case 'add-user':
-                $act = new AddUserAction();
+                $act = new ActionInscription();
                 $this->renderPage($act->execute());
                 break;
             case 'sign-in':

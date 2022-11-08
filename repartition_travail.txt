@@ -1,5 +1,7 @@
 Répartition du Travail
 
+tâche complétés : 1,2
+
 Théo : 7. Page d’accueil d’un utilisateur : afficher ses séries préférées
 Naël : 4. Affichage détaillé d’une série et de la liste de ses épisodes
 Yann : réalisation du squelette principal / structure application puis 5. Affichage/visionnage d’un épisode d’une série
@@ -12,49 +14,4 @@ base de donnée :
 à faire :
 
 maquette du site / application
-CSS
-
-arborescence
-
-/src
-    /autoloader
-
-    /classes
-        /action
-            ActionConnexion
-            ActionAccueil
-            ActionInscrire
-            ActionCatalogue
-            ActionSerie
-            ActionEpisode
-            ...
-
-        /authentification
-            Auth
-            User
-
-        /bd
-            ConnectionFactory
-            db.config.ini
-
-        /dispatch
-            Dispatcher
-
-        /exception
-            Exception1
-            Exception2
-            ...
-
-        /render
-            <<Interface>> Renderer
-            RenderEpisode
-            RenderSerie
-            RenderCatalogue
-
-        /NetVOD
-            /episode
-                Episode
-
-            /serie
-                Serie
-index.php
+(CSS ?)

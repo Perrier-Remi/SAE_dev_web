@@ -70,19 +70,19 @@ class Auth
 
     public static function checkPasswordStrength(string $pass, int $minimumLength):bool{
         $length = (strlen($pass) > $minimumLength);
-        $digit = true; //preg_match("#[\d]#", $pass);
-        $special = true; //preg_match("#[\W]#", $pass);
-        $lower = true; // preg_match("#[a-z]#", $pass);
-        $upper = true; //preg_match("#[A-Z]#", $pass);
+        $digit = preg_match("#[\d]#", $pass);
+        $special = preg_match("#[\W]#", $pass);
+        $lower = preg_match("#[a-z]#", $pass);
+        $upper = preg_match("#[A-Z]#", $pass);
 
-        if (!$length || !$digit || !$special || !$lower || !$upper) return false;
-        return true;
+        return $length && $digit && $special && $lower && $upper;
     }
 
-    public static function register(string $email, string $pass): bool{
+    public static function register(string $email, string $pass, string $pass_confirm): bool{
         if (!self::checkPasswordStrength($pass,10)) throw new AuthException("password trop faible");
         $hash=password_hash($pass, PASSWORD_DEFAULT,['cost'=> 12] );
         try {
+            ConnectionFactory::setConfig('src/classes/bd/db.config.ini');
             $db= ConnectionFactory::makeConnection();
         }catch (\Exception $e){
             throw new AuthException($e ->getMessage());
@@ -96,10 +96,14 @@ class Auth
             echo $data['email'];
         }
 
+        if (!(password_verify($pass, $hash) && password_verify($pass_confirm, $hash))) {
+            throw new AuthException("mots de passes non identiques");
+        }
+
         try {
-            $query = "insert into user (email, passwd ) values(?,?)";
+            $query = "insert into user (email, passhash) values(?,?)";
             $stmt = $db->prepare($query);
-            $res = $stmt->execute([$email, $hash]);
+            $stmt->execute([$email, $hash]);
         } catch (\PDOException $e) {
             throw new AuthException("erreur de creation de compte : :".$e->getMessage());
         }
