@@ -3,9 +3,5 @@
     "psr-4": {
       "iutnc\\netvod\\": "src/classes"
     }
-  },
-  "require": {
-    "ext-pdo": "*",
-    "php-ffmpeg/php-ffmpeg": "^1.0"
   }
 }
