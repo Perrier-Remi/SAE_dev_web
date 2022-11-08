@@ -4,6 +4,7 @@ namespace iutnc\netvod\dispatch;
 
 use iutnc\netvod\action\ActionCatalogue;
 use iutnc\netvod\action\AccueilAction;
+use iutnc\netvod\action\ActionDeconnecter;
 use iutnc\netvod\action\ActionInscription;
 use iutnc\netvod\action\ActionSerie;
 use iutnc\netvod\action\ActionSignIn as ActionSignIn;
@@ -41,6 +42,10 @@ class Dispatcher
                 break;
             case 'serie':
                 $act = new ActionSerie();
+                $this->renderPage($act->execute());
+                break;
+            case 'deconnecter':
+                $act = new ActionDeconnecter();
                 $this->renderPage($act->execute());
                 break;
             default:
