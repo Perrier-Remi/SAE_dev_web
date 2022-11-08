@@ -87,3 +87,10 @@ INSERT INTO `serie` (`id`, `titre`, `descriptif`, `img`, `annee`, `date_ajout`) 
 
 ALTER TABLE userAime ADD FOREIGN KEY (id_user) REFERENCES user(id);
 ALTER TABLE userAime ADD FOREIGN KEY (id_serie) REFERENCES serie(id);
+
+DROP TABLE IF EXISTS `serieEnCours`;
+CREATE TABLE `serieEnCours` (
+  `id_user` int(11) NOT NULL,
+  `id_serie` int(11) NOT NULL,
+  PRIMARY KEY (`id_user`, `id_serie`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
