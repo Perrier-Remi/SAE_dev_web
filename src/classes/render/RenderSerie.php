@@ -11,6 +11,10 @@ class RenderSerie implements Renderer
         $this->serie=$serie;
     }
 
+    /**
+     * @param $selector 0 pour compact, 1 pour complet
+     * @return string
+     */
     public function render($selector=0): string
     {
         $html = "";

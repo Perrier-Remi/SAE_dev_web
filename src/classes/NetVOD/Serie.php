@@ -11,6 +11,7 @@ class Serie
     protected int $dateSortie;
     protected string $dateAjout;
     protected array $listeEpisode;
+    protected string $cheminImage;
 
     /**
      * @param string $titre
@@ -20,11 +21,10 @@ class Serie
      * @param int $dateSortie
      * @param string $dateAjout
      */
-    public function __construct(string $titre, string $genre='action', string $public, string $descriptif, int $dateSortie, string $dateAjout)
+    public function __construct(string $titre, string $cheminImage, string $descriptif, int $dateSortie, string $dateAjout)
     {
         $this->titre = $titre;
-        $this->genre = $genre;
-        $this->public = $public;
+        $this->cheminImage=$cheminImage;
         $this->descriptif = $descriptif;
         $this->dateSortie = $dateSortie;
         $this->dateAjout = $dateAjout;
