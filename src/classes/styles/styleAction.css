@@ -1,7 +1,9 @@
-#accueil li button
+body
 {
     background-color: black;
-    color: white;
-    margin:10px 10px 10px 10px;
-    border: 2px solid grey;
+    color:white;
+    font-family: Arial;
 }
+
+
+/*style="background-color: #1a1a1a; color: white;"*/
