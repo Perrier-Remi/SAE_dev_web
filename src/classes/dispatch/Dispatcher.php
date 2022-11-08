@@ -72,14 +72,13 @@ class Dispatcher
 
         </head>
         <body>
-            <center>
             <h1>NETVOD</h1>
             <form name='menu' action='' method='post'>
                 <button formaction='index.php?action=accueil'>Accueil</button>
                 <button formaction='index.php?action=catalogue'>Catalogue</button>
                 <button formaction='index.php?action=deconnecter'>Deconnecter</button>
             </form>
-            </center><br><br>
+            <br><br>
         
             $html
         </body>
