@@ -54,13 +54,25 @@ h1
     margin-top:20px;
     height:6vh;
     padding:1.5vh 1.5% 1.5vh 1.5%;
-
 }
 
-#f1 a:hover, #f1 button:hover, .btnsubmit:hover
+#f1 a:hover, #f1 button:hover, .btnsubmit:hover, #accueil li button:hover
 {
     text-decoration:underline;
     cursor: pointer;
+}
+
+#accueil li
+{
+    list-style-type:none;
+}
+
+#accueil li button
+{
+    margin:0.5% 2% 0.5% 2%;
+    text-align:justify;
+    font-size:1.2vw;
+    width:15vw;
 }
 
 
