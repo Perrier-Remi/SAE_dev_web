@@ -2,6 +2,8 @@
 
 namespace iutnc\netvod\NetVOD;
 
+use iutnc\netvod\bd\ConnectionFactory;
+
 class Serie
 {
     protected string $titre;
