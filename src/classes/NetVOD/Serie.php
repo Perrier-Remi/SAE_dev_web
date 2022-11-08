@@ -19,9 +19,8 @@ class Serie
      * @param string $descriptif
      * @param int $dateSortie
      * @param string $dateAjout
-     * @param array $listeEpisode
      */
-    public function __construct(string $titre, string $genre, string $public, string $descriptif, int $dateSortie, string $dateAjout, array $listeEpisode)
+    public function __construct(string $titre, string $genre='action', string $public, string $descriptif, int $dateSortie, string $dateAjout)
     {
         $this->titre = $titre;
         $this->genre = $genre;
