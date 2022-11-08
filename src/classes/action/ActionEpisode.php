@@ -26,11 +26,13 @@ class ActionEpisode extends Action
             $serie_stmt = $db->prepare("SELECT serie_id FROM episode where id=?");
             $serie_stmt->execute([$_GET['id_episode']]);
             $id_serie = $serie_stmt->fetch()[0];
-            $stmt_encours = $db->prepare("INSERT INTO serieEnCours(id_user, id_serie) VALUES (?,?)");
+            $id_user = unserialize($_SESSION['user'])->__get('id');
+            $stmt_encours = $db->prepare("INSERT INTO serieEnCours(id_user, id_serie) VALUES (?,?);");
             try {
-                $stmt_encours->execute([$_GET['id_episode'], $id_serie]);
+                $stmt_encours->execute([$id_user, $id_serie]);
+                $html .= "<div style=\"text-align:center\"><h3> Nouvelle série </h3> </div>";
             } catch (\Exception $e) {
-                $html .= "<p> Problème dans la requête SQL </p>";
+                $html .= "<div style=\"text-align:center\"><h3> Série en cours </h3> </div>";
             }
 
 
@@ -40,6 +42,8 @@ class ActionEpisode extends Action
             $episode = new Episode($donnees[1], $donnees[2] , $donnees[4], $donnees[3], $donnees[5]);
             $renderer = new RenderEpisode($episode);
             $html .= $renderer->render();
+
+
         }
         return $html;
     }
