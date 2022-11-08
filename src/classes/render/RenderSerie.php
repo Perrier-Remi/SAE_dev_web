@@ -33,7 +33,9 @@ class RenderSerie implements Renderer
 
     private function renderCompact(): string
     {
-        $html = "<img src=" . $this->serie->__get("cheminFichier") . ">" . $this->serie->__get("titre") . "</img>";
+        $img = $this->serie->__get('cheminImage');
+        $html = "<img src='$img' style='width:150px;height:120px;'>" . $this->serie->__get("titre");
+
         return $html;
     }
 

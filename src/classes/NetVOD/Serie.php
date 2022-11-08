@@ -26,7 +26,8 @@ class Serie
     public function __construct(string $titre, string $cheminImage, string $descriptif, int $dateSortie, string $dateAjout,string $id_serie)
     {
         $this->titre = $titre;
-        $this->cheminImage=$cheminImage;
+        //$this->cheminImage=$cheminImage;
+        $this->cheminImage='video/thumbnail.png';
         $this->descriptif = $descriptif;
         $this->dateSortie = $dateSortie;
         $this->dateAjout = $dateAjout;

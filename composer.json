@@ -5,6 +5,7 @@
     }
   },
   "require": {
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+    "php-ffmpeg/php-ffmpeg": "^1.0"
   }
 }
