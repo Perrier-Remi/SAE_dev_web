@@ -2,6 +2,7 @@
 
 namespace iutnc\netvod\dispatch;
 
+use iutnc\netvod\action\ActionAjouterFavoris;
 use iutnc\netvod\action\ActionCatalogue;
 use iutnc\netvod\action\AccueilAction;
 use iutnc\netvod\action\ActionDeconnecter;
@@ -53,6 +54,7 @@ class Dispatcher
                 $act = new ActionDeconnecter();
                 $this->renderPage($act->execute());
                 break;
+
             default:
                 $this->renderPage("<div style=\"text-align: center;\"> Bonjour! </div>");
                 break;
