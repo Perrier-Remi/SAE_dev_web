@@ -1,6 +1,6 @@
 Répartition du Travail
 
-tâche complétés : 1,2
+tâche complétés : 1, 2, 3, 4, 5, 7
 
 Théo : 7. Page d’accueil d’un utilisateur : afficher ses séries préférées
 Naël : 4. Affichage détaillé d’une série et de la liste de ses épisodes
@@ -18,5 +18,3 @@ connexion automatique apres inscription
 
 maquette du site / application
 (CSS ?)
-
-sanitizer les inputs pour la tâche 1 et 2
