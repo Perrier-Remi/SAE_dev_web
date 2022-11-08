@@ -4,6 +4,7 @@ namespace iutnc\netvod\action;
 
 
 use iutnc\netvod\NetVOD\Serie;
+use iutnc\netvod\render\RenderSerie;
 
 class AccueilAction extends Action
 {
@@ -11,21 +12,29 @@ class AccueilAction extends Action
     public function execute(): string
     {
         $retour = <<<end
-                <h1>Séries que vous avez aimé</h1>
-                
+                <h3>Séries que vous avez aimé</h3>
+                <center>
+                <ul>
                end;
         if (isset($_SESSION['user'])){
             $db = ConnectionFactory::makeConnection();
             $query ="SELECT * FROM useraime WHERE id=?";
             $result = $db->prepare($query);
             $result->execute([$_SESSION['user']]);
-
-            $nom='';
             while($datas = $result->fetch(\PDO::FETCH_ASSOC)) {
-                $serie = new Serie();
-
+                // creer series
+                $id_serie = $datas['id_serie'];
+                $query2 ="SELECT * FROM useraime WHERE id=?";
+                $result2 = $db->prepare($query2);
+                $result2->execute([$id_serie]);
+                $res = $result2->fetch(\PDO::FETCH_ASSOC);
+                $serie = new Serie($res['titre'],'action','adultes',$res['descriptif'],$res['annee'],$res['date_ajout']);
+                $render = new RenderSerie($serie);
+                $data = $render->render();
+                $retour .= "<li><button formaction='index.php?action=serie&id=$id_serie'>$data</button></li>";
             }
             $result->closeCursor();
+            $retour .= '</center></ul>';
 
         }
         return $retour;
