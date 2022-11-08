@@ -11,5 +11,6 @@ if (isset($_GET['action'])) {
 } else {
     $action = "";
 }
+
 $dispatcher = new Dispatcher($action);
 $dispatcher->run();
