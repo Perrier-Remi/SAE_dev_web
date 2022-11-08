@@ -67,7 +67,7 @@ class Dispatcher
         <head>
         <meta charset=\"utf-8\">
         <title>NetVod</title>
-        <link rel="stylesheet" type="text/css" href="src/classes/styles/styleAction.css"/>
+        <link rel="stylesheet" type="text/css" href="src/classes/styles/styleAction.css"/> 
         </head>
         <body>
             <h1>NETVOD</h1>
