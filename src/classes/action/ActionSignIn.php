@@ -11,17 +11,15 @@ class ActionSignIn extends Action
     public function execute(): string
     {
 
-        $html = "";
-        if ($this->http_method === 'GET') {
-            $html =
-                " <form id=\"f1\" method=\"post\" action='?action=sign-in'>
+        $html =
+            " <form id=\"f1\" method=\"post\" action='?action=sign-in'>
             <input type=\"email\" placeholder=\"email\" name=\"email\">
             <input type=\"password\" placeholder=\"*****\" name=\"pswd\">
             <div style=\"text-align: center\"> 
             <button type=\"submit\" name=\"connexion\" value=\"vrai\"> Connexion </button> </div>
             <a href='index.php?action=add-user'>s'inscrire</a>
             </form>";
-        } else {
+        if ($this->http_method === 'POST') {
             try {
                 if (! filter_var($_POST['email'], FILTER_SANITIZE_EMAIL) ) {
                     throw new AuthException("email invalide");
@@ -35,10 +33,8 @@ class ActionSignIn extends Action
                 $html = "<p> Connexion réussie </p>";
             } catch (AuthException $e) {
                 $message = $e->getMessage();
-                $html = <<< END
+                $html .= <<< END
                     <p>$message</p>
-                    <a href='index.php?action=add-user'>s'inscrire</a>
-                    <a href='index.php?action=sign-in'>se connecter</a>
                 END;
             }
         }
