@@ -67,16 +67,14 @@ class Dispatcher
         <head>
         <meta charset=\"utf-8\">
         <title>NetVod</title>
-
-        <link rel="stylesheet" type="text/css" href="../styles/styleAction.css"/>
-
+        <link rel="stylesheet" type="text/css" href="src/classes/styles/styleAction.css"/>
         </head>
         <body>
             <h1>NETVOD</h1>
-            <form name='menu' action='' method='post'>
-                <button formaction='index.php?action=accueil'>Accueil</button>
-                <button formaction='index.php?action=catalogue'>Catalogue</button>
-                <button formaction='index.php?action=deconnecter'>Deconnecter</button>
+            <form name='menu' action="" method='get'>
+                <input type="submit" name="action" value="accueil">
+                <input type="submit" name="action" value="catalogue">
+                <input type="submit" name="action" value="deconnecter">
             </form>
             <br><br>
         

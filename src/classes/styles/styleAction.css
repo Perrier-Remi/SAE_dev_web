@@ -1,9 +1,25 @@
 body
 {
-    background-color: black;
+    background-color: #1a1a1a;
     color:white;
     font-family: Arial;
     text-align: center;
+}
+
+h1
+{
+    color:red;
+    font-size:3vw;
+    margin-top:3%;
+}
+
+form input
+{
+    background-color: red;
+    padding:1% 1% 1% 1%;
+    margin:15px 2% 15px 2%;
+    color:white;
+    border:0px;
 }
 
 
