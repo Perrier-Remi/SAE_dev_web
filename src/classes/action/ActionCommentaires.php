@@ -23,6 +23,7 @@ class ActionCommentaires extends Action
             }
         }else
             $retour= 'id de la serie manquant';
+        if ($retour == "") $retour='pas encore de commentaire';
         return $retour;
     }
 }

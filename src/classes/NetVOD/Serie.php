@@ -41,11 +41,11 @@ class Serie
         }
     }
 
-    public function getNoteMoyenne():float{
+    public static function getNoteMoyenne(int $id):float{
         $db = ConnectionFactory::makeConnection();
-        $query2 = "SELECT note FROM commentaires WHERE serie_id=?";
+        $query2 = "SELECT note FROM commentaires WHERE id_serie=?";
         $result2 = $db->prepare($query2);
-        $result2->execute([$this->id]);
+        $result2->execute([$id]);
         $result2->setFetchMode(\PDO::FETCH_ASSOC);
         $retour=0;
         $nbNotes=0;
@@ -54,6 +54,6 @@ class Serie
             $nbNotes++;
         }
         if ($nbNotes==0) $nbNotes=1;
-        return ($retour/$nbNotes);
+        return round($retour/$nbNotes,1);
     }
 }

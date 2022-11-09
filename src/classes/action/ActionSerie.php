@@ -86,6 +86,12 @@ class ActionSerie extends Action
                     }
                 }
                 $html .= "</form></center></ul>";
+                $id = $_GET['id'];
+                if (Serie::getNoteMoyenne($id)>0){
+                    $nb=Serie::getNoteMoyenne($id).'/5';
+                }else $nb='non noté';
+                $html .= "Note moyenne :$nb <br>";
+                $html .= "<a href='index.php?action=commentaires&id=$id'>accéder aux commentaires</a>";
             }
         }
         return $html;
