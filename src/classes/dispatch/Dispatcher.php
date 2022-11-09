@@ -74,9 +74,9 @@ class Dispatcher
         <body>
             <h1>NETVOD</h1>
             <form name='menu' action="" method='get'>
-                <input class="btnsubmit" type="submit" name="action" value="accueil">
-                <input class="btnsubmit" type="submit" name="action" value="catalogue">
-                <input class="btnsubmit" type="submit" name="action" value="deconnecter">
+                <input class="btnsubmit" type="submit" name="action" value="Accueil">
+                <input class="btnsubmit" type="submit" name="action" value="Catalogue">
+                <input class="btnsubmit" type="submit" name="action" value="Se déconnecter">
             </form>
             <br><br>
         
