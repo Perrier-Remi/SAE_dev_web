@@ -9,7 +9,6 @@ class ActionInscription extends Action {
 
     public function execute(): string {
 
-        $html = "";
         if ($this->http_method === 'GET') {
             $html =
                 " <form id=\"f1\" method=\"post\" action='?action=add-user'>
@@ -17,7 +16,7 @@ class ActionInscription extends Action {
             <input type=\"password\" placeholder=\"mot de passe\" name=\"pswd\">
             <input type=\"password\" placeholder=\"confirmez le mot de passe\" name=\"pswd_confirm\">
             <div style=\"text-align: center\"> 
-            <button type=\"submit\" name=\"connexion\" value=\"vrai\"> Inscription </button> </div>
+            <button type=\"submit\" name=\"inscription\" value=\"vrai\"> Inscription </button> </div>
             </form>";
         } else {
             try {
@@ -33,8 +32,17 @@ class ActionInscription extends Action {
                 $mail = $_POST['email'];
                 $password = $_POST['pswd'];
                 $password_confirm = $_POST['pswd_confirm'];
-                Auth::register($mail, $password, $password_confirm);
-                $html = "<p> Compte crée avec succès </p>";
+
+                Auth::checkCredentials($mail, $password, $password_confirm);
+                $_SESSION['email_inscription'] = $mail;
+                $_SESSION['hash_mdp_inscription']= password_hash($password, PASSWORD_DEFAULT, ['cost' => 12]);
+
+                $chaineAleatoire = bin2hex(random_bytes(64));
+                $dateExpiration = date('YmdHis', strtotime("+1 hour"));
+                $tokenServeur = $dateExpiration."|".$chaineAleatoire;
+                $_SESSION['token_inscription'] = $tokenServeur;
+
+                $html = "<form method='POST'><button formaction='index.php?action=confirmer-inscription&token=$tokenServeur'>confirmer l'inscription</button></form>";
             } catch (AuthException $e) {
                 $message = $e->getMessage();
                 $html = "<p> Problème avec la création du compte : $message </p>";
