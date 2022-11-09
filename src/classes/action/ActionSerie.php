@@ -40,17 +40,17 @@ class ActionSerie extends Action
                 }
                 $id_user = unserialize($_SESSION['user'])->__get('id');
                 $id = $_GET['id'];
-                if(!isset($_GET['ajFav'])){
-                   if($this->pasEnFavori($db,$id_user,$id)){
-                       $html .= "<button formaction='index.php?action=serie&id=$id&ajFav=NONE'>Ajouter au favoris</button>";
-                   };
-                }
-                    else if (($this->pasEnFavori($db, $id_user, $id) && $_GET['ajFav']!='NONE') || ($_GET['ajFav'] == 'OK')) {
-                        echo $this->pasEnFavori($db,$id_user,$id);
+                if (!isset($_GET['ajFav'])) {
+                    if ($this->pasEnFavori($db, $id_user, $id)) {
                         $html .= "<button formaction='index.php?action=serie&id=$id&ajFav=NONE'>Ajouter au favoris</button>";
                     } else {
                         $html .= "<button formaction='index.php?action=serie&id=$id&ajFav=OK'>Supprimer au favoris</button>";
                     }
+                } else if (($this->pasEnFavori($db, $id_user, $id) && $_GET['ajFav'] != 'NONE') || ($_GET['ajFav'] == 'OK')) {
+                    $html .= "<button formaction='index.php?action=serie&id=$id&ajFav=NONE'>Ajouter au favoris</button>";
+                } else {
+                    $html .= "<button formaction='index.php?action=serie&id=$id&ajFav=OK'>Supprimer au favoris</button>";
+                }
 
                 if (isset($_GET['ajFav'])) {
                     //si y'a un clic sur le boutton de gestion des favoris
@@ -65,7 +65,8 @@ class ActionSerie extends Action
 //            $html .= "<div style=\"text-align:center\"><h3> mal ajoutee </h3> </div>";
                         }
                     }
-                    if($_GET['ajFav'] =='OK'){
+                    if ($_GET['ajFav'] == 'OK') {
+                        //si y'a un clic sur le boutton supprimer Favoris
                         $stmt_encours = $db->prepare("DELETE FROM useraime where id_user=? and  id_serie=?;");
                         try {
                             $stmt_encours->execute([$id_user, $id]);
@@ -78,9 +79,7 @@ class ActionSerie extends Action
                 }
                 $html .= "</form></center></ul>";
             }
-
         }
-
         return $html;
 
     }
