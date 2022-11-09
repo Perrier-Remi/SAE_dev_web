@@ -42,10 +42,10 @@ class RenderSerie implements Renderer
 
     private function renderComplet(): string
     {
-        $html = "<h2><u>Titre :</u> " . $this->serie->__get("titre") . "</h2> <br>" .
+        $html = "<div id='detailserie'><h2><u>Titre :</u> " . $this->serie->__get("titre") . "</h2> <br>" .
             $this->serie->__get("descriptif") . "<br>" .
             "<h3>date d'ajout : " . $this->serie->__get("dateAjout") . " </h3><br>";
-            "<h3>date de sortie : " . $this->serie->__get("dateSortie") . " </h3><br>";
+            "<h3>date de sortie : " . $this->serie->__get("dateSortie") . " </h3><br></div>";
 
         return $html;
     }
