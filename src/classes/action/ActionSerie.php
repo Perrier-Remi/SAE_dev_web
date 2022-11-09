@@ -40,9 +40,12 @@ class ActionSerie extends Action
                 }
                 $id_user = unserialize($_SESSION['user'])->__get('id');
                 $id = $_GET['id'];
-
-
-                    if (($this->pasEnFavori($db, $id_user, $id) && $_GET['ajFav']!='NONE') || ($_GET['ajFav'] == 'OK')) {
+                if(!isset($_GET['ajFav'])){
+                   if($this->pasEnFavori($db,$id_user,$id)){
+                       $html .= "<button formaction='index.php?action=serie&id=$id&ajFav=NONE'>Ajouter au favoris</button>";
+                   };
+                }
+                    else if (($this->pasEnFavori($db, $id_user, $id) && $_GET['ajFav']!='NONE') || ($_GET['ajFav'] == 'OK')) {
                         echo $this->pasEnFavori($db,$id_user,$id);
                         $html .= "<button formaction='index.php?action=serie&id=$id&ajFav=NONE'>Ajouter au favoris</button>";
                     } else {
