@@ -36,7 +36,7 @@ class ActionSerie extends Action
                         $episode = new Episode($datas[1], $datas[2], $datas[4], $datas[3], $datas[5]);
                         $renderer = new RenderEpisode($episode);
                         $renderEpisode = $renderer->render(1);
-                        $html .= "<li><button formaction='index.php?action=episode&id_episode=$id_episode'>$renderEpisode</button></li>";
+                        $html .= "<li><button formaction='index.php?action=episode&id_episode=$id_episode'><div id='txtbtn'>$renderEpisode</div></button></li>";
                     }
                     $id = $_GET['id'];
 
