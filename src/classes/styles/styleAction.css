@@ -109,5 +109,40 @@ h1
     text-align:left;
 }
 
+#search
+{
+    width:50vw;
+    margin:auto;
+    text-align: left;
+    padding:3vh 0 3vh 0;
+    font-size: 2vw;
+}
+
+#search input
+{
+    font-size: 1.4vw;
+    border:3px solid black;
+    padding:0.5vh 1vw 0.5vh 1vw;
+}
+
+#search input:hover
+{
+    border:3px solid white;
+}
+
+#search #searchbar:hover
+{
+    cursor: text;
+    color:white;
+    background-color: black;
+}
+
+#search #btnsearch:hover
+{
+    cursor: pointer;
+    background-color: #bf0000;
+    color:white;
+}
+
 
 /*style="background-color: #1a1a1a; color: white;"*/

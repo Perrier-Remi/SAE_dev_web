@@ -14,8 +14,8 @@ class ActionCatalogue extends Action
     {
         $html = <<<end
                     <form id="search" action ="" method = "get">
-                <input type = "search" name = "terme">
-                <input type = "submit" name = "action" value = "rechercher">
+                <input id="searchbar" type = "search" name = "terme">
+                <input id="btnsearch" type = "submit" name = "action" value = "rechercher">
                 </form>
                 end;
 
