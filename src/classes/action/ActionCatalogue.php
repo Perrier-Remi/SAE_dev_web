@@ -13,7 +13,7 @@ class ActionCatalogue extends Action
     public function execute(): string
     {
         $html = <<<end
-                    <form action ="" method = "get">
+                    <form id="search" action ="" method = "get">
                 <input type = "search" name = "terme">
                 <input type = "submit" name = "action" value = "rechercher">
                 </form>
