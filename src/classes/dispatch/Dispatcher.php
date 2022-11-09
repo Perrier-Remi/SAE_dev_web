@@ -104,12 +104,14 @@ class Dispatcher
         <body>
             <h1>NETVOD</h1>
             <form name='menu' action="" method='get'>
-                <input class="btnsubmit" type="submit" name="action" value="accueil">
-                <input class="btnsubmit" type="submit" name="action" value="catalogue">
-                <input class="btnsubmit" type="submit" name="action" value="deconnecter">
-            </form>      
-            $btnRetour
+
+                <button class="btnsubmit" type="submit" name="action" value="accueil">Accueil</button>
+                <button class="btnsubmit" type="submit" name="action" value="catalogue">Catalogue</button>
+                <button class="btnsubmit" type="submit" name="action" value="deconnecter">Se déconnecter</button>
+            </form>
             <br>
+
+            $btnRetour
         
             $html
         </body>

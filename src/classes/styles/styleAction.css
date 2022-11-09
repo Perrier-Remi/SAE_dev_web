@@ -1,6 +1,8 @@
 body
 {
-    background-color: #1a1a1a;
+    background-image:url("img_1.png");
+    background-repeat: no-repeat;
+    background-size: cover;
     color:white;
     font-family: Arial;
     text-align: center;
