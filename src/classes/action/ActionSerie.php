@@ -38,30 +38,32 @@ class ActionSerie extends Action
                         $renderEpisode = $renderer->render(1);
                         $html .= "<li><button formaction='index.php?action=episode&id_episode=$id_episode'>$renderEpisode</button></li>";
                     }
-                    $id_serie = $_GET['id'];
-                if (!isset($_GET['ajFav'])) {
-                    $html .= "<button formaction='index.php?action=serie&id_serie=$id_serie&ajFav=ok'>Ajouter au favoris</button>";
-                } else {
-                    try {
+                    $id = $_GET['id'];
+
+                    $html .= "<button formaction='index.php?action=serie&id=$id&ajFav=ok'>Ajouter au favoris</button>";
+                 if(isset($_GET['ajFav'])){
+                     try {
                         $db = ConnectionFactory::makeConnection();
                     } catch (\Exception $e) {
                         $html .= "<p> Connection à la base de données impossible</p>";
                     }
                     $id_user = unserialize($_SESSION['user'])->__get('id');
-                    $id_serie = $_GET['id_serie'];
+                    $id = $_GET['id'];
                     $stmt = $db->prepare("SELECT count(*) from useraime where id_user=? and id_serie=?");
-                    $stmt->execute([$id_user, $id_serie]);
+                    $stmt->execute([$id_user, $id]);
                     $data = $stmt->fetch();
                     if ($data[0] == 0) {
-
                         $stmt_encours = $db->prepare("INSERT INTO useraime(id_user, id_serie) VALUES (?,?);");
                         try {
-                            $stmt_encours->execute([$id_user, $id_serie]);
+                            $stmt_encours->execute([$id_user, $id]);
                             $html .= "<div style=\"text-align:center\"><h3> Serie ajoutee </h3> </div>";
                         } catch (\Exception $e) {
                             echo $e;
 //            $html .= "<div style=\"text-align:center\"><h3> mal ajoutee </h3> </div>";
                         }
+                    }
+                    else{
+                        $html.="<div style=\"text-align:center\"><h3> Serie déjà ajoutee </h3> </div>";
                     }
                 }
                 $html.="</form></center></ul>";
