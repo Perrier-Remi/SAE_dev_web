@@ -94,3 +94,17 @@ CREATE TABLE `serieEnCours` (
   `id_serie` int(11) NOT NULL,
   PRIMARY KEY (`id_user`, `id_serie`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE serieEnCours ADD FOREIGN KEY (id_user) REFERENCES user(id);
+ALTER TABLE serieEnCours ADD FOREIGN KEY (id_serie) REFERENCES serie(id);
+
+DROP TABLE IF EXISTS `commentaires`;
+CREATE TABLE commentaires (
+    id_user INT,
+    id_serie INT,
+    note INT,
+    commentaire VARCHAR(500),
+    PRIMARY KEY(id_user,id_serie));
+
+ALTER TABLE commentaires ADD FOREIGN KEY (id_user) REFERENCES user(id);
+ALTER TABLE commentaires ADD FOREIGN KEY (id_serie) REFERENCES serie(id);
