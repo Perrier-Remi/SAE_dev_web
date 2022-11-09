@@ -70,15 +70,18 @@ h1
 #accueil li button
 {
     margin:0.5% 2% 0.5% 2%;
-    text-align:justify;
-    font-size:1.2vw;
-    width:15vw;
+    text-align:left;
+    font-size:1.4vw;
+    width:50vw;
+    height:17vh;
+    padding:0.8vh 1vw 0.8vh 3%;
 }
 
 #accueil li button img
 {
     horiz-align: left;
-    height:3vh;
+    max-height:15vh;
+
 }
 
 

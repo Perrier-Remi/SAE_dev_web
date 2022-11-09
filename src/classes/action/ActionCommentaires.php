@@ -13,7 +13,7 @@ class ActionCommentaires extends Action
         if (isset($_GET['id'])) {
             $db = ConnectionFactory::makeConnection();
             $id = $_GET['id'];
-            $query2 = "SELECT commentaire FROM commentaires WHERE serie_id=?";
+            $query2 = "SELECT commentaire FROM commentaires WHERE id_serie=?";
             $result2 = $db->prepare($query2);
             $result2->execute([$id]);
             $result2->setFetchMode(\PDO::FETCH_ASSOC);
