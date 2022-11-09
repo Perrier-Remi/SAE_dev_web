@@ -13,7 +13,7 @@ if (isset($_GET['action'])) {
 } else {
     $action = "";
 }
-if (!isset($_SESSION['user']) && $action != 'add-user'){
+if (!isset($_SESSION['user']) && $action != 'add-user' && $action != 'confirmer-inscription'){
     $action = 'sign-in';
 }
 

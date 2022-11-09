@@ -78,35 +78,47 @@ class Auth
         return $length && $digit && $special && $lower && $upper;
     }
 
-    public static function register(string $email, string $pass, string $pass_confirm): bool{
-        if (!self::checkPasswordStrength($pass,10)) throw new AuthException("password trop faible");
-        $hash=password_hash($pass, PASSWORD_DEFAULT,['cost'=> 12] );
+    public static function checkCredentials(string $email, string $pass, string $pass_confirm): bool
+    {
+        if (!self::checkPasswordStrength($pass, 10)) throw new AuthException("password trop faible");
+        $hash = password_hash($pass, PASSWORD_DEFAULT, ['cost' => 12]);
         try {
             ConnectionFactory::setConfig('src/classes/bd/db.config.ini');
-            $db= ConnectionFactory::makeConnection();
-        }catch (\Exception $e){
-            throw new AuthException($e ->getMessage());
+            $db = ConnectionFactory::makeConnection();
+        } catch (\Exception $e) {
+            throw new AuthException($e->getMessage());
         }
         $query_email = "select * from user where email = ?";
         $stmt = $db->prepare($query_email);
         $stmt->execute([$email]);
         $stmt->setFetchMode(\PDO::FETCH_ASSOC);
-        while ($data=$stmt->fetch()){
+        while ($data = $stmt->fetch()) {
             if ($data['email'] == $email) throw new AuthException("Compte déjà existant");
-            echo $data['email'];
         }
 
         if (!(password_verify($pass, $hash) && password_verify($pass_confirm, $hash))) {
             throw new AuthException("mots de passes non identiques");
         }
+        return true;
+    }
 
+    public static function register(string $email, string $passhash) : void {
         try {
+            ConnectionFactory::setConfig('src/classes/bd/db.config.ini');
+            $db = ConnectionFactory::makeConnection();
+            $query_email = "select * from user where email = ?";
+            $stmt = $db->prepare($query_email);
+            $stmt->execute([$email]);
+            $stmt->setFetchMode(\PDO::FETCH_ASSOC);
+            while ($data = $stmt->fetch()) {
+                if ($data['email'] == $email) throw new AuthException("Compte déjà existant");
+            }
+
             $query = "insert into user (email, passhash) values(?,?)";
             $stmt = $db->prepare($query);
-            $stmt->execute([$email, $hash]);
+            $stmt->execute([$email, $passhash]);
         } catch (\PDOException $e) {
             throw new AuthException("erreur de creation de compte : :".$e->getMessage());
         }
-        return true;
     }
 }
