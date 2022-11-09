@@ -2,7 +2,27 @@
 
 namespace iutnc\netvod\action;
 
-class ActionCommentaires
+use iutnc\netvod\bd\ConnectionFactory;
+
+class ActionCommentaires extends Action
 {
 
+    public function execute(): string
+    {
+        $retour = "";
+        if (isset($_GET['id'])) {
+            $db = ConnectionFactory::makeConnection();
+            $id = $_GET['id'];
+            $query2 = "SELECT commentaire FROM commentaires WHERE serie_id=?";
+            $result2 = $db->prepare($query2);
+            $result2->execute([$id]);
+            $result2->setFetchMode(\PDO::FETCH_ASSOC);
+            while ($data = $result2->fetch()) {
+                $text=$data['commentaire'];
+                $retour .= "<textarea type=\"text\" name=\"comm\" rows='8' cols='50' readonly='true'>$text</textarea><br>";
+            }
+        }else
+            $retour= 'id de la serie manquant';
+        return $retour;
+    }
 }

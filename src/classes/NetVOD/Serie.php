@@ -12,8 +12,8 @@ class Serie
     protected string $descriptif;
     protected int $dateSortie;
     protected string $dateAjout;
-    protected array $listeEpisode;
     protected string $cheminImage;
+    protected string $id;
 
     /**
      * @param string $titre
@@ -31,17 +31,9 @@ class Serie
         $this->descriptif = $descriptif;
         $this->dateSortie = $dateSortie;
         $this->dateAjout = $dateAjout;
-        $this->generateListeEpisodes($id_serie);
+        $this->id = $id_serie;
 
     }
-    public function generateListeEpisodes($id_serie){
-        $db = ConnectionFactory::makeConnection();
-        $query2 = "SELECT * FROM episode WHERE serie_id=?";
-        $result2 = $db->prepare($query2);
-        $result2->execute([$id_serie]);
-        $res = $result2->fetch(\PDO::FETCH_ASSOC);
-    }
-
 
     public function __get($property) {
         if (property_exists($this, $property)) {
@@ -49,4 +41,19 @@ class Serie
         }
     }
 
+    public function getNoteMoyenne():float{
+        $db = ConnectionFactory::makeConnection();
+        $query2 = "SELECT note FROM commentaires WHERE serie_id=?";
+        $result2 = $db->prepare($query2);
+        $result2->execute([$this->id]);
+        $result2->setFetchMode(\PDO::FETCH_ASSOC);
+        $retour=0;
+        $nbNotes=0;
+        while($data=$result2->fetch()){
+            $retour += $data['note'];
+            $nbNotes++;
+        }
+        if ($nbNotes==0) $nbNotes=1;
+        return ($retour/$nbNotes);
+    }
 }
