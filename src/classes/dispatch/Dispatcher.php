@@ -5,6 +5,7 @@ namespace iutnc\netvod\dispatch;
 use iutnc\netvod\action\ActionAjouterFavoris;
 use iutnc\netvod\action\ActionCatalogue;
 use iutnc\netvod\action\AccueilAction;
+use iutnc\netvod\action\ActionChercher;
 use iutnc\netvod\action\ActionConfirmationInscription;
 use iutnc\netvod\action\ActionCommentaires;
 use iutnc\netvod\action\ActionDeconnecter;
@@ -75,6 +76,10 @@ class Dispatcher
                 break;
             case 'profil':
                 $act = new ActionProfil();
+                $this->renderPage($act->execute());
+                break;
+            case 'rechercher':
+                $act=new ActionChercher();
                 $this->renderPage($act->execute());
                 break;
             default:
