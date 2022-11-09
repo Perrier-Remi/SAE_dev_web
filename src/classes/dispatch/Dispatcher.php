@@ -72,7 +72,7 @@ class Dispatcher
         <html lang=\"fr\">
         <head>
         <meta charset=\"utf-8\">
-        <title>NetVod</title>
+        <title>NetVOD</title>
         <link rel="stylesheet" type="text/css" href="src/classes/styles/styleAction.css"/> 
         </head>
         <body>
@@ -82,7 +82,7 @@ class Dispatcher
                 <input class="btnsubmit" type="submit" name="action" value="catalogue">
                 <input class="btnsubmit" type="submit" name="action" value="deconnecter">
             </form>
-            <br><br>
+            <br>
         
             $html
         </body>
