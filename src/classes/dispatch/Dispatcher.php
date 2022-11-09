@@ -29,14 +29,6 @@ class Dispatcher
 
     public function run(): void
     {
-        $current= $_SERVER['QUERY_STRING'];
-        if (!isset($_SESSION['url_prec'])){
-            $_SESSION['url_actuel']=$current;
-            $_SESSION['url_prec']=$current;
-        }else{
-            $_SESSION['url_prec']=$_SESSION['url_actuel'];
-            $_SESSION['url_actuel']=$current;
-        }
         switch ($this->action) {
             case 'add-user':
                 $act = new ActionInscription();
@@ -83,7 +75,7 @@ class Dispatcher
                 $this->renderPage($act->execute());
                 break;
             default:
-                $this->renderPage("<div style=\"text-align: center;\"> Bonjour! </div>");
+                $this->renderPage("<div style=\"text-align: center;\"> Bonjour par defaut! </div>");
                 break;
         }
     }
@@ -91,11 +83,16 @@ class Dispatcher
     public function renderPage(string $html): void
     {
         $btnRetour='';
+        if (isset($_GET['retour']) && $_GET['action']!='episode'){
+            array_pop($_SESSION['list_url']);
+            array_pop($_SESSION['list_url']);
+        }
         if ($_GET['action']=='serie' || $_GET['action']=='episode'){
-            $url = $_SESSION['url_prec'];
-            echo $url;
+            //$url = end($_SESSION['list_url']);
+            $url = $_SESSION['list_url'][count($_SESSION['list_url'])-2];
+            if ($url==""){$url = 'index.php?'.$_SERVER['QUERY_STRING'];}
             $btnRetour.="<form method='post'>";
-            $btnRetour.="<button formaction='index.php?$url'>Retour</button>";
+            $btnRetour.="<button formaction='index.php?$url&retour' >Retour</button>";
             $btnRetour.="</form>";
         }
         print(
@@ -113,6 +110,8 @@ class Dispatcher
                 <button class="btnsubmit" type="submit" name="action" value="accueil">Accueil</button>
                 <button class="btnsubmit" type="submit" name="action" value="catalogue">Catalogue</button>
                 <button class="btnsubmit" type="submit" name="action" value="deconnecter">Se déconnecter</button>
+                <button class="btnsubmit" type="submit" name="action" value="profil">Profil</button>
+                
             </form>
             <br>
 
