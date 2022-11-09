@@ -26,6 +26,14 @@ class Dispatcher
 
     public function run(): void
     {
+        $current= $_SERVER['QUERY_STRING'];
+        if (!isset($_SESSION['url_prec'])){
+            $_SESSION['url_actuel']=$current;
+            $_SESSION['url_prec']=$current;
+        }else{
+            $_SESSION['url_prec']=$_SESSION['url_actuel'];
+            $_SESSION['url_actuel']=$current;
+        }
         switch ($this->action) {
             case 'add-user':
                 $act = new ActionInscription();
@@ -59,6 +67,10 @@ class Dispatcher
                 $act = new ActionCommentaires();
                 $this->renderPage($act->execute());
                 break;
+                case 'profil':
+                $act = new ActionProfil();
+                $this->renderPage($act->execute());
+                break;
             default:
                 $this->renderPage("<div style=\"text-align: center;\"> Bonjour! </div>");
                 break;
@@ -67,6 +79,7 @@ class Dispatcher
 
     public function renderPage(string $html): void
     {
+        $btnRetour="<button formaction=''>Retour</button>";
         print(
         <<<end
         <html lang=\"fr\">
@@ -77,11 +90,13 @@ class Dispatcher
         </head>
         <body>
             <h1>NETVOD</h1>
+            
             <form name='menu' action="" method='get'>
                 <input class="btnsubmit" type="submit" name="action" value="accueil">
                 <input class="btnsubmit" type="submit" name="action" value="catalogue">
                 <input class="btnsubmit" type="submit" name="action" value="deconnecter">
-            </form>
+            </form>      
+            $btnRetour
             <br>
         
             $html
