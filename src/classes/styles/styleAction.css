@@ -65,23 +65,32 @@ h1
 #accueil li
 {
     list-style-type:none;
+    vertical-align:center;
 }
 
 #accueil li button
 {
     margin:0.5% 2% 0.5% 2%;
     text-align:left;
-    font-size:1.4vw;
+    font-size:2vw;
     width:50vw;
-    height:17vh;
-    padding:0.8vh 1vw 0.8vh 3%;
+    height:auto;
+    padding:0;
 }
 
 #accueil li button img
 {
     horiz-align: left;
     max-height:15vh;
+}
 
+#txtbtn
+{
+    padding-top:6vh;
+    padding-bottom:3vh;
+    display:inline-block;
+    vertical-align:top;
+    margin-left:2vw;
 }
 
 
