@@ -75,7 +75,11 @@ h1
     width:15vw;
 }
 
-li img
+#accueil li button img
+{
+    horiz-align: left;
+    height:3vh;
+}
 
 
 /*style="background-color: #1a1a1a; color: white;"*/
