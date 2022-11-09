@@ -85,7 +85,14 @@ class Dispatcher
 
     public function renderPage(string $html): void
     {
-        $btnRetour="<button formaction=''>Retour</button>";
+        $btnRetour='';
+        if ($_GET['action']=='serie' || $_GET['action']=='episode'){
+            $url = $_SESSION['url_prec'];
+            echo $url;
+            $btnRetour.="<form method='post'>";
+            $btnRetour.="<button formaction='index.php?$url'>Retour</button>";
+            $btnRetour.="</form>";
+        }
         print(
         <<<end
         <html lang=\"fr\">
