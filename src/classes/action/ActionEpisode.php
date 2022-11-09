@@ -64,34 +64,22 @@ class ActionEpisode extends Action
                 $commentaire = true;
             }
 
-            if ($this->http_method === "GET") {
-                if (!$commentaire) {
-                    $html .=
-                        " <form id=\"f1\" method=\"post\" action='?action=episode&id_episode=" . $_GET['id_episode'] . "'>
-                        <div style=\"text-align: center\"> 
-                        <input type=\"number\" placeholder=\"De 1 à 5\" name=\"note\"> </div>
-                        <div style=\"text-align: center\"> 
-                        <input type=\"text\" placeholder=\"Ecrivez votre commentaire\" name=\"comm\"> </div>
-                        <div style=\"text-align: center\"> 
-                        <button type=\"submit\" name=\"commentaire\" value=\"vrai\"> Valider </button> </div>
-                        </form>";
-                } else {
-                    $html .= "<div style=\"text-align:center\"><h3> Vous avez déja laissé un commentaire à cette série </h3> </div>";
-                }
-            } else {
-                if (isset($_POST['note'])&&isset($_POST['comm'])) {
+            if ($commentaire) {
+                $html .= "<div style=\"text-align:center\"><h3> Vous avez déjà posté un commentaire pour cette série </h3> </div> <br>";
+            }
+            if (isset($_POST['note']) && isset($_POST['comm'])) {
 
-                } else {
-                    $html .= "<div style=\"text-align:center\"><h3> Veuillez compléter la note par un entier entre 1 et 5
+            } else {
+                $html .= "<div style=\"text-align:center\"><h3> Veuillez compléter la note par un entier entre 1 et 5
                     et l'espace commentaire </h3> </div> <br>";
-                }
             }
 
         }
         return $html;
     }
 
-    public function htmlComm() : string {
+    public function htmlComm(): string
+    {
         return " <form id=\"f1\" method=\"post\" action='?action=episode&id_episode=" . $_GET['id_episode'] . "'>
                         <div style=\"text-align: center\"> 
                         <input type=\"number\" placeholder=\"De 1 à 5\" name=\"note\"> </div>
