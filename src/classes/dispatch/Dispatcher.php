@@ -5,6 +5,7 @@ namespace iutnc\netvod\dispatch;
 use iutnc\netvod\action\ActionAjouterFavoris;
 use iutnc\netvod\action\ActionCatalogue;
 use iutnc\netvod\action\AccueilAction;
+use iutnc\netvod\action\ActionConfirmationInscription;
 use iutnc\netvod\action\ActionCommentaires;
 use iutnc\netvod\action\ActionDeconnecter;
 use iutnc\netvod\action\ActionEpisode;
@@ -55,8 +56,8 @@ class Dispatcher
                 $act = new ActionDeconnecter();
                 $this->renderPage($act->execute());
                 break;
-            case 'commentaires':
-                $act = new ActionCommentaires();
+            case 'confirmer-inscription':
+                $act = new ActionConfirmationInscription();
                 $this->renderPage($act->execute());
                 break;
             default:
@@ -72,7 +73,7 @@ class Dispatcher
         <html lang=\"fr\">
         <head>
         <meta charset=\"utf-8\">
-        <title>NetVOD</title>
+        <title>NetVod</title>
         <link rel="stylesheet" type="text/css" href="src/classes/styles/styleAction.css"/> 
         </head>
         <body>
@@ -82,7 +83,7 @@ class Dispatcher
                 <button class="btnsubmit" type="submit" name="action" value="catalogue">Catalogue</button>
                 <button class="btnsubmit" type="submit" name="action" value="deconnecter">Se déconnecter</button>
             </form>
-            <br>
+            <br><br>
         
             $html
         </body>
