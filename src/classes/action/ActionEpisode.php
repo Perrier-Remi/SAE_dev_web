@@ -68,13 +68,14 @@ class ActionEpisode extends Action
                 $html .= "<div style=\"text-align:center\"><h3> Vous avez déjà posté un commentaire pour cette série </h3> </div> <br>";
             } else {
                 if (isset($_POST['note']) && isset($_POST['comm'])) {
-                    if ($_POST['comm'] == null || $_POST['comm'] == "") {
+                    $comm = filter_var($_POST['comm'], FILTER_SANITIZE_STRING);
+                    if ($_POST['comm'] == null || $comm == "") {
                         $html .= "<div style=\"text-align:center\"><h3> Veuillez écrire un commentaire en mettant une note ! </h3> </div> <br>";
                         $html .= $this->htmlComm();
                     } else {
                         $stmt_addComm = $db->prepare("INSERT INTO commentaires VALUES (?,?,?,?);");
                         try {
-                            $stmt_addComm->execute([$id_user, $id_serie, $_POST['note'], $_POST['comm']]);
+                            $stmt_addComm->execute([$id_user, $id_serie, $_POST['note'], $comm]);
                             $html .= "<div style=\"text-align:center\"><h3> Commentaire ajouté ! </h3> </div> <br>";
                         } catch (\Exception $e) {
                             $html .= "<div style=\"text-align:center\"><h3> Erreur dans l'ajout du commentaire </h3> </div> <br>";
@@ -97,7 +98,7 @@ class ActionEpisode extends Action
                         <input type=\"number\" min=\"1\" max=\"5\" step=\"1\" name=\"note\"> </div>
                         <div style=\"text-align: center\"> <label> Commentaire : </label> </div>
                         <div style=\"text-align: center\">
-                        <textarea type=\"text\" name=\"comm\" rows='20' cols='100'></textarea> </div>
+                        <textarea type=\"text\" name=\"comm\" rows='8' cols='55'></textarea> </div>
                         <div style=\"text-align: center\"> 
                         <button type=\"submit\" name=\"commentaire\" value=\"vrai\"> Valider </button> </div>
                         </form>";
