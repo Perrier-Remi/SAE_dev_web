@@ -131,6 +131,7 @@ class Auth
             $stmt = $db->prepare($query_email);
             $stmt->execute([$email]);
             $stmt->setFetchMode(\PDO::FETCH_ASSOC);
+            $trouve=false;
             while ($data = $stmt->fetch()) {
                 if ($data['email'] == $email){
                     $trouve = true;

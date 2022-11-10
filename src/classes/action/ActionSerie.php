@@ -92,8 +92,17 @@ class ActionSerie extends Action
                     $nb=Serie::getNoteMoyenne($id).'/5';
                 }else $nb='non noté';
                 $html .= "Note moyenne : $nb <br>";
-                $html .= "<a href='index.php?action=commentaires&id=$id'>accéder aux commentaires</a>";
+                $option="&commentaires' >accéder aux";
+                $ajout='';
+                if (isset($_GET['commentaires'])){
+                    $act = new ActionCommentaires();
+                    $ajout .=$act->execute();
+                    $option = "' style='font-size: 2vw;' > retirer les";
+                }
+                $html .= "<a id='comLink' f href='index.php?action=serie&id=$id $option commentaires</a>";
                 $html .='</div>';
+
+                $html .= $ajout;
             }
         }
         return $html;

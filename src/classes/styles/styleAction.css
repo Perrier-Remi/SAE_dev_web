@@ -46,11 +46,18 @@ h1 {
 
 #btnRetour {
     margin-left: 7%;
-    float: left;
+    position: fixed;
+    top: 10%;
+    left: 2%;
     min-width: 40px;
     min-height: 40px;
     border-radius: 50%;
     background-color: #bf0000;
+}
+
+#btnRetour:hover {
+    transform: rotate3d(1, 1, 1, 360deg);
+    transition-duration: 1s;
 }
 
 #btnRetour > img {
@@ -74,19 +81,23 @@ h2 {
     padding:1% 1% 1% 1%;
     margin:15px 0 0 0;/*15px 2% 15px 2%;*/
     color:white;
-    border-width: 0px 0px 0px 2px;
+    border-radius: 5px;
+    border-left-color: gray;
+    border-right-color: white;
+    border-width: 0px 2px 0px 2px;
     font-size:1.4vw;
 
 }
 #premierBtn
 {
-    border-left-width: 0px;
-    border-radius: 20% 0 0 20%;
+    /*border-left-width: 0px;*/
+    /*border-radius: 20% 0 0 20%;*/
 }
 
 #dernierBtn
 {
-    border-radius: 0 20% 20% 0;
+    /*border-right-width: 0px;*/
+    /*border-radius: 0 20% 20% 0;*/
 }
 
 #f1 input
@@ -120,8 +131,13 @@ h2 {
     height:6vh;
     padding:1.5vh 1.5% 1.5vh 1.5%;
 }
+.btnsubmit:hover{
+    cursor: pointer;
+    color: black;
+    transform: scale(1.1);
+}
 
-#f1 a:hover, #f1 button:hover, .btnsubmit:hover, .episode > li > button:hover
+#f1 a:hover, #f1 button:hover, .episode > li > button:hover
 {
     text-decoration:underline;
     cursor: pointer;
@@ -233,6 +249,14 @@ h2 {
     margin: 10px auto;
     width: 150px;
 }
+
+ #comLink,#comLink:visited{
+    color: skyblue;
+}
+ #comLink:hover
+ {
+     font-size: 2vw;
+ }
 
 
 /*style="background-color: #1a1a1a; color: white;"*/
