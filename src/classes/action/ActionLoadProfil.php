@@ -81,6 +81,7 @@ class ActionLoadProfil extends Action
                 $id=$data['id_user'];
                 $nom=$data['nom'];
                 $prenom=$data['prenom'];
+                if ($nb==3){$html.='<br>';}
                 $html.="<button class='profil' type='submit' name='button$nb' value='$id'".$desactivation."><img class='profile' src='src/classes/styles/cadre-photo.png'>Profil $nb : $nom $prenom</button>";
                 $nb++;
             }
