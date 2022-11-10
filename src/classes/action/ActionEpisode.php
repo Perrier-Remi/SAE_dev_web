@@ -120,40 +120,43 @@ class ActionEpisode extends Action
 
     public function episodeEnCours(\PDO $db, $id_user, $id_serie) : string {
         $html = "";
+
+        // Enlever l'ancien épisode courant si il existe
+        $stmt_oldEp = $db->prepare("SELECT id_episode FROM episodeEnCours WHERE actuel = ? AND id_episode != ?");
+        try {
+            $stmt_oldEp->execute([true, $_GET['id_episode']]);
+            if (isset($stmt_oldEp->fetch(\PDO::FETCH_ASSOC)[0])) {
+                $oldEp = $stmt_oldEp->fetch()[0];
+                $stmt_updateOldEp = $db->prepare("UPDATE episodeEnCours SET actuel = ? WHERE id_episode = ?");
+                $stmt_updateOldEp->execute([false, $oldEp]);
+            }
+        } catch (\Exception $e) {
+            $html .= "<div style=\"text-align:center\"><h3> Erreur dans la requête SQL epEnCours</h3> </div>";
+        }
+
+        // Ajout du nouvel épisode
         $stmt_episodeInListe = $db->prepare("SELECT COUNT(*) FROM episodeEnCours WHERE id_episode = ?");
         $stmt_episodeInListe->execute([$_GET['id_episode']]);
         // Si l'episode n'a jamais été regardé
         if ($stmt_episodeInListe->fetch()[0] === 0) {
-            $stmt_episode = $db->prepare("INSERT INTO episodeEnCours(id_user, id_serie, id_episode, actuel) VALUES (?,?,?,true)");
+            $stmt_episode = $db->prepare("INSERT INTO episodeEnCours(id_user, id_serie, id_episode, actuel) VALUES (?,?,?,?)");
             try {
-                $stmt_episode->execute([$id_user, $id_serie, $_GET['id_episode']]);
+                $stmt_episode->execute([$id_user, $id_serie, $_GET['id_episode'], true]);
                 $html .= "<div style=\"text-align:center\"><h3> Nouvel épisode </h3> </div>";
             } catch (\Exception $e) {
                 $html .= "<div style=\"text-align:center\"><h3> Erreur dans la requête SQL epEnCours </h3> </div>";
             }
         // Si il a déjà été regardé
         } else {
-            $stmt_episode = $db->prepare("UPDATE episodeEnCours SET actuel = true WHERE id_episode = ?");
+            $stmt_episode = $db->prepare("UPDATE episodeEnCours SET actuel = ? WHERE id_episode = ?");
             try {
-                $stmt_episode->execute([$_GET['id_episode']]);
+                $stmt_episode->execute([true, $_GET['id_episode']]);
                 $html .= "<div style=\"text-align:center\"><h3> Revisionnage de l'épisode </h3> </div>";
             } catch (\Exception $e) {
                 $html .= "<div style=\"text-align:center\"><h3> Erreur dans la requête SQL epEnCours </h3> </div>";
             }
         }
 
-        // Enlever l'ancien épisode courant si il existe
-        $stmt_oldEp = $db->prepare("SELECT id_episode FROM episodeEnCours WHERE actuel = true AND id_episode != ?");
-        try {
-            $stmt_oldEp->execute([$_GET['id_episode']]);
-            if (isset($stmt_oldEp->fetch(\PDO::FETCH_ASSOC)[0])) {
-                $oldEp = $stmt_oldEp->fetch()[0];
-                $stmt_updateOldEp = $db->prepare("UPDATE episodeEnCours SET actuel = false WHERE id_episode = ?");
-                $stmt_updateOldEp->execute([$oldEp]);
-            }
-        } catch (\Exception $e) {
-            $html .= "<div style=\"text-align:center\"><h3> Erreur dans la requête SQL epEnCours</h3> </div>";
-        }
         return $html;
     }
 
