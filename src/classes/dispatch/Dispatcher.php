@@ -124,7 +124,7 @@ class Dispatcher
             <form name='menu' id="menu" action="" method='get'>
                 <button id='premierBtn'class="btnsubmit" type="submit" name="action" value="accueil">Accueil</button>
                 <button class="btnsubmit" type="submit" name="action" value="catalogue">Catalogue</button>
-                <button class="btnsubmit" type="submit" name="action" value="deconnecter">Se déconnecter</button>
+                <button class="btnsubmit" type="submit" name="action" value="deconnecter">Déconnexion</button>
                 <button  id="dernierBtn" class="btnsubmit" type="submit" name="action" value="profil">Profil</button>
             </form>
             $btnRetour

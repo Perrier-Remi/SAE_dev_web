@@ -250,13 +250,13 @@ h2 {
     width: 150px;
 }
 
- #comLink,#comLink:visited{
+#comLink,#comLink:visited{
     color: skyblue;
 }
- #comLink:hover
- {
-     font-size: 2vw;
- }
+#comLink:hover
+{
+    font-size: 2vw;
+}
 
 
 /*style="background-color: #1a1a1a; color: white;"*/

@@ -18,7 +18,7 @@ class ActionEpisode extends Action
         $html = "";
         if (!isset($_GET['id_episode'])) {
             $html .= "<div style=\"text-align:center\"><h3> Id Episode Manquant </h3> </div>";
-        } elseif (!isset($_SESSION['user'])) {
+        } elseif (!isset($_SESSION['id_user'])) {
             $html .= "<p> Utilisateur Non Connecté </p>";
         } else {
             try {
@@ -34,7 +34,7 @@ class ActionEpisode extends Action
                 $html .= "<div style=\"text-align:center\"><h3> Episode inconnu </h3> </div>";
             }
             $id_serie = $serie_stmt->fetch()[0];
-            $id_user = unserialize($_SESSION['user'])->__get('id');
+            $id_user = $_SESSION['id_user'];
             $stmt_encours = $db->prepare("INSERT INTO serieEnCours(id_user, id_serie) VALUES (?,?)");
             try {
                 $stmt_encours->execute([$id_user, $id_serie]);

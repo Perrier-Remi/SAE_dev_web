@@ -4,13 +4,12 @@ namespace iutnc\netvod\authentification;
 
 use iutnc\netvod\exception\AuthException as AuthException;
 use iutnc\netvod\bd\ConnectionFactory as ConnectionFactory;
-use iutnc\netvod\authentification\User as User;
 
 class Auth
 {
 
 
-    public static function authenticate(string $email, string $hpassword): mixed
+    public static function authenticate(string $email, string $hpassword): void
     {
         ConnectionFactory::setConfig('src/classes/bd/db.config.ini');
         $bdd = ConnectionFactory::makeConnection();
@@ -22,12 +21,10 @@ class Auth
         $resultat = $requete->fetch();
 
         if (password_verify($hpassword, $resultat[0])) {
-            $retour = new User($email, $resultat[0], $resultat[1]);
             self::loadProfile($email);
         } else {
             throw new AuthException("email ou mot de passe invalide");
         }
-        return $retour;
     }
 
 
@@ -43,29 +40,7 @@ class Auth
         $userDB = $stmt->fetch(\PDO::FETCH_ASSOC);
 
         if (!$userDB) throw new AuthException("profile not found");
-        $user = new User($email, $userDB['passhash'], $userDB['id']);
-        $_SESSION['user'] = serialize($user);
-    }
-
-    public static function checkAccessLevel (int $required): void
-    {
-        $userlevel = (int)(unserialize($_SESSION['user']))->role;
-        if (!$userlevel >= $required) throw new AuthException("action non autorisee");
-    }
-
-    public static function checkAccessOwner(int $playlistId):void {
-        if (! isset($_SESSION['user'])) throw new \Exception("action non authorisée : défaut d' authentification");
-        $user = unserialize($_SESSION['user']);
-        if ($user->role === User::ADMIN_USER) return;
-
-        $query = 'SELECT * FROM user u , user2playlist p where email = ? and u.id = p.id_user and p.id_pl = ?';
-        $db = ConnectionFactory::makeConnection();
-
-        $stmt = $db->prepare($query);
-        $res = $stmt->execute([$user->email,$playlistId]);
-        if (!$res) throw new \Exception("error");
-
-        if (!$stmt->fetch(\PDO::FETCH_ASSOC)) throw new \Exception("error");
+        $_SESSION['id_user'] = $userDB['id'];
     }
 
     public static function checkPasswordStrength(string $pass, int $minimumLength):bool{

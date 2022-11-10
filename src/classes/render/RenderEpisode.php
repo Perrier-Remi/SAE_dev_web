@@ -2,7 +2,6 @@
 
 namespace iutnc\netvod\render;
 
-require_once 'src/classes/NetVOD/Episode.php';
 use iutnc\netvod\NetVOD\Episode;
 
 class RenderEpisode implements Renderer
