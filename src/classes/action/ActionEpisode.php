@@ -7,6 +7,7 @@ require_once 'src/classes/bd/ConnectionFactory.php';
 
 use iutnc\netvod\bd\ConnectionFactory;
 use iutnc\netvod\NetVOD\Episode;
+use iutnc\netvod\NetVOD\Serie;
 use iutnc\netvod\render\RenderEpisode;
 
 class ActionEpisode extends Action
@@ -77,6 +78,7 @@ class ActionEpisode extends Action
                         try {
                             $stmt_addComm->execute([$id_user, $id_serie, $_POST['note'], $comm]);
                             $html .= "<div style=\"text-align:center\"><h3> Commentaire ajouté ! </h3> </div> <br>";
+                            Serie::getNoteMoyenne($id_serie);
                         } catch (\Exception $e) {
                             $html .= "<div style=\"text-align:center\"><h3> Erreur dans l'ajout du commentaire </h3> </div> <br>";
                         }
