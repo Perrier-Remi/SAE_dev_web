@@ -23,6 +23,8 @@ class Serie
      * @param int $dateSortie
      * @param string $dateAjout
      */
+
+
     public function __construct(string $titre, string $cheminImage, string $descriptif, int $dateSortie, string $dateAjout,string $id_serie,string $genre='action',$public='adulte')
     {
         $this->titre = $titre;

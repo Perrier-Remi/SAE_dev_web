@@ -2,6 +2,7 @@
 
 namespace iutnc\netvod\render;
 
+use iutnc\netvod\bd\ConnectionFactory;
 use iutnc\netvod\NetVOD\Serie;
 
 class RenderSerie implements Renderer

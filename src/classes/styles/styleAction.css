@@ -26,14 +26,16 @@ body
     text-align: center;
 }
 
-h1 {
+h1
+{
     color: red;
     font-size: 5vw;
     margin-top: 3%;
     text-align: center;
-    font-family: Akira;
 }
+
 #GrandTitre{
+    font-family: Akira;
     user-select: none;
     text-shadow: 0 0 60px rgba(255,255,255,.5);
 
@@ -185,6 +187,7 @@ h2 {
     padding:0;
 }
 
+
 #accueil li button img
 {
     horiz-align: left;
@@ -285,6 +288,11 @@ h2 {
 {
     font-size: 1vw;
     text-decoration:underline;
+}
+
+.profil
+{
+    margin:10px 10px 10px 10px;
 }
 
 
