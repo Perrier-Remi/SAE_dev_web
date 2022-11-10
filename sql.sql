@@ -106,7 +106,7 @@ ALTER TABLE serieEnCours ADD FOREIGN KEY (id_user) REFERENCES user(id);
 ALTER TABLE serieEnCours ADD FOREIGN KEY (id_serie) REFERENCES serie(id);
 
 DROP TABLE IF EXISTS `serieDejaVisionnee`;
-CREATE TABLE `serieEnCours` (
+CREATE TABLE `serieDejaVisionnee` (
   `id_user` int(11) NOT NULL,
   `id_serie` int(11) NOT NULL,
   PRIMARY KEY (`id_user`, `id_serie`)
