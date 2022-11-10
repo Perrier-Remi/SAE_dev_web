@@ -85,6 +85,7 @@ class ActionProfil extends Action
                         </div> <br> <br>
                         
                         <div style=\"text-align: center\">
+                            <label id='descprofilgnr'><br>Choisissez votre genre de séries préféré :<br><br></label>
                             <input type='checkbox' id='action' name='action' value='action'> <label for='action'> Action</label>
                             <input type='checkbox' id='aventure' name='aventure' value='aventure'> <label for='aventure'> Aventure</label>
                             <input type='checkbox' id='thriller' name='thriller' value='thriller'> <label for='thriller'> Thriller</label>

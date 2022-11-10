@@ -19,7 +19,7 @@ class ActionCommentaires extends Action
             $result2->setFetchMode(\PDO::FETCH_ASSOC);
             while ($data = $result2->fetch()) {
                 $text=$data['commentaire'];
-                $retour .= "<textarea type=\"text\" name=\"comm\" rows='8' cols='50' readonly='true'>$text</textarea><br>";
+                $retour .= "<textarea id='comtr' type=\"text\" name=\"comm\" rows='3' cols='50' readonly='true'>$text</textarea><br>";
             }
         }else
             $retour= 'id de la serie manquant';

@@ -257,5 +257,16 @@ h2 {
     font-size: 2vw;
 }
 
+#comtr
+{
+    margin-top:2vh;
+}
+
+#descprofilgnr
+{
+    font-size: 1vw;
+    text-decoration:underline;
+}
+
 
 /*style="background-color: #1a1a1a; color: white;"*/
