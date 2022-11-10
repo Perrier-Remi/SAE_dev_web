@@ -43,7 +43,7 @@ class ActionInscription extends Action {
                 $tokenServeur = $dateExpiration."|".$chaineAleatoire;
                 $_SESSION['token_inscription'] = $tokenServeur;
 
-                $html = "<p>cliquez sur ce lien pour confirmer l'inscription : </p><a style='color:dodgerblue' href='index.php?action=confirmer-inscription&token=$tokenServeur'>confirmer l'inscription</a>";
+                $html = "<p>cliquez sur ce lien pour confirmer l'inscription : <a style='color:dodgerblue' href='index.php?action=confirmer-inscription&token=$tokenServeur'>confirmer l'inscription</a></p>";
             } catch (AuthException $e) {
                 $message = $e->getMessage();
                 $html = "<p style='color:red'> Problème avec la création du compte : $message </p>";

@@ -33,7 +33,7 @@ class ActionMotDePasseOublie extends Action
                 $tokenServeur = $dateExpiration."|".$chaineAleatoire;
                 $_SESSION['token_changement_mdp'] = $tokenServeur;
 
-                $html = "<p>cliquez sur le lien pour changer de mot de passe : </p><a style='color:dodgerblue' href='index.php?action=mdp-oublie-confirmation&token=$tokenServeur'>changer le mot de passe</a>";
+                $html = "<p>cliquez sur le lien pour changer de mot de passe : <a style='color:dodgerblue' href='index.php?action=mdp-oublie-confirmation&token=$tokenServeur'>changer le mot de passe</a></p>";
             } catch (AuthException $e) {
                 $message = $e->getMessage();
                 $html = "<p style='color:red'> Problème le changement de mot de passe du compte : $message </p>";
