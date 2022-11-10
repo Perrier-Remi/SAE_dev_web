@@ -2,8 +2,8 @@
 
 namespace iutnc\netvod\action;
 
-use iutnc\netvod\exception\AuthException as AuthException;
-use iutnc\netvod\authentification\Auth as Auth;
+use iutnc\netvod\exception\AuthException;
+use iutnc\netvod\authentification\Auth;
 
 class ActionInscription extends Action {
 
@@ -38,8 +38,9 @@ class ActionInscription extends Action {
                 $_SESSION['email_inscription'] = $mail;
                 $_SESSION['hash_mdp_inscription']= password_hash($password, PASSWORD_DEFAULT, ['cost' => 12]);
 
+                // création du token de validation d'inscription du compte
                 $chaineAleatoire = bin2hex(random_bytes(64));
-                $dateExpiration = date('YmdHis', strtotime("+1 hour"));
+                $dateExpiration = date('YmdHis', strtotime("+1 hour")); // le token a une validité de une heure
                 $tokenServeur = $dateExpiration."|".$chaineAleatoire;
                 $_SESSION['token_inscription'] = $tokenServeur;
 

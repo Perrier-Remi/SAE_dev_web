@@ -2,7 +2,6 @@
 
 namespace iutnc\netvod\action;
 
-
 use iutnc\netvod\NetVOD\Serie;
 use iutnc\netvod\render\RenderSerie;
 use iutnc\netvod\bd\ConnectionFactory;

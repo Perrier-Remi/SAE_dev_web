@@ -28,8 +28,9 @@ class ActionMotDePasseOublie extends Action
 
                 $_SESSION['email_mdp_oublie'] = $mail;
 
+                //création d'un token pour vérifier que c'est le bon utilisateur qui veut changer de mot de passe
                 $chaineAleatoire = bin2hex(random_bytes(64));
-                $dateExpiration = date('YmdHis', strtotime("+1 hour"));
+                $dateExpiration = date('YmdHis', strtotime("+1 hour")); // le token a une validité de une heure
                 $tokenServeur = $dateExpiration."|".$chaineAleatoire;
                 $_SESSION['token_changement_mdp'] = $tokenServeur;
 

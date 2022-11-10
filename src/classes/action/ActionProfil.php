@@ -2,7 +2,6 @@
 
 namespace iutnc\netvod\action;
 
-require_once 'src/classes/bd/ConnectionFactory.php';
 use iutnc\netvod\bd\ConnectionFactory;
 
 class ActionProfil extends Action
