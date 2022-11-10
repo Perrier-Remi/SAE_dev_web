@@ -18,8 +18,8 @@ class ActionSignIn extends Action
             <input type=\"password\" placeholder=\"*****\" name=\"pswd\">
             <div style=\"text-align: center\"> 
             <button type=\"submit\" name=\"connexion\" value=\"vrai\"> Connexion </button> </div>
-            <p>pas de compte ? <a style='color:dodgerblue' href='index.php?action=add-user'>Inscrivez-vous !</a></p>
-            <p>vous avez oublié votre mot de passe ? <a style='color:dodgerblue' href='index.php?action=mdp-oublie'>Changez votre mot passe</a></p>
+            <p>pas de compte ?<a style='color:dodgerblue' href='index.php?action=add-user'>Inscrivez-vous !</a></p>
+            <p>vous avez oublié votre mot de passe ?<a style='color:dodgerblue' href='index.php?action=mdp-oublie'>Changez votre mot passe</a></p>
             </form>";
 
         } else {
