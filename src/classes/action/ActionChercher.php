@@ -75,7 +75,7 @@ class ActionChercher extends Action
             //si good vrai , c'est que le mot de la descr est dans le titre
             foreach ($motsTitre as $motTitre) {
                 //compare chaque mot de la description avec un mot du titre
-                if ($motTitre == $motTerme) {
+                if (preg_match("/".$motTerme."/i", $motTitre) === 1) {
                     $good = true;
                 }
             }
