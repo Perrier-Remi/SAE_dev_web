@@ -6,6 +6,7 @@ use iutnc\netvod\action\ActionAjouterFavoris;
 use iutnc\netvod\action\ActionCatalogue;
 use iutnc\netvod\action\AccueilAction;
 use iutnc\netvod\action\ActionChercher;
+use iutnc\netvod\action\ActionFiltrer;
 use iutnc\netvod\action\ActionInscriptionConfirmation;
 use iutnc\netvod\action\ActionInscription;
 use iutnc\netvod\action\ActionCommentaires;
@@ -84,8 +85,11 @@ class Dispatcher
                 $act=new ActionMotDePasseOublieConfirmation();
                 $this->renderPage($act->execute());
                 break;
+            case 'filtrer':
+                $act=new ActionFiltrer();
+                $this->renderPage($act->execute());
             default:
-                $this->renderPage("<div style=\"text-align: center;\"> Bonjour par defaut! </div>");
+                $this->renderPage("<div style=\"text-align: center;\"> $this->action </div>");
                 break;
         }
     }

@@ -19,6 +19,22 @@ class ActionCatalogue extends Action
                 </form>
                 end;
 
+        $html .= "
+            <form id=\"f1\" method=\"post\" action='?action=catalogue'>
+                        <div style=\"text-align: center\"> 
+                        <label for='filtre-select'> filtrer par genre : </label>
+                        <select name='filtrer' id='filtre-select'>
+                            <option value='action'>Action </option>
+                            <option value='aventure'>aventure</option>
+                            <option value='thriller'>Thriller</option>
+                            <option value='horreur'>Horreur</option>
+                            <option value='romance'>romance</option>
+                            
+                        </select>
+                        <button type=\"submit\" name=\"commentaire\" value=\"vrai\"> Filtrer </button> </div>
+                        </form>";
+
+
         $html .= " <form id=\"f1\" method=\"post\" action='?action=catalogue'>
                         <div style=\"text-align: center\"> 
                         <label for='tri-select'> Trier par : </label>
@@ -40,13 +56,23 @@ class ActionCatalogue extends Action
 
         if (isset($_POST['tri'])) {
             $tri = $_POST['tri'];
-        } else {
-            $tri = "";
+        }
+        else if(isset($_POST['filtrer'])) {
+            $tri='genre';
+            $genre=$_POST['filtrer'];
+
+        }
+        else{
+            $tri="";
         }
 
         switch ($tri) {
+
+            case 'genre':
+                $html.=$this->tri($db,"SELECT * FROM serie where genre='$genre'");
+                break;
             case 'titre':
-                $html .= $this->tri($db, "SELECT * FROM serie ORDER BY titre ASC");
+                $html .= $this->tri($db, "SELECT * FROM serie  ORDER BY titre ASC");
                 break;
             case 'dateAjout':
                 $html .= $this->tri($db, "SELECT * FROM serie ORDER BY date_ajout ASC");
@@ -65,7 +91,8 @@ class ActionCatalogue extends Action
         return $html;
     }
 
-    public function tri(\PDO $db, string $query) : string {
+    public function tri(\PDO $db, string $query): string
+    {
         $html = "";
         $result = $db->prepare($query);
         $result->execute();

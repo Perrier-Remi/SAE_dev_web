@@ -23,7 +23,7 @@ class Serie
      * @param int $dateSortie
      * @param string $dateAjout
      */
-    public function __construct(string $titre, string $cheminImage, string $descriptif, int $dateSortie, string $dateAjout,string $id_serie)
+    public function __construct(string $titre, string $cheminImage, string $descriptif, int $dateSortie, string $dateAjout,string $id_serie,string $genre='action',$public='adulte')
     {
         $this->titre = $titre;
         //$this->cheminImage=$cheminImage;
@@ -32,6 +32,8 @@ class Serie
         $this->dateSortie = $dateSortie;
         $this->dateAjout = $dateAjout;
         $this->id = $id_serie;
+        $this->public=$public;
+        $this->genre=$genre;
 
     }
 
