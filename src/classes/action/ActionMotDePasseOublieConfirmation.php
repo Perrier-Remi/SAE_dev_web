@@ -36,7 +36,7 @@ class ActionMotDePasseOublieConfirmation extends Action
                 if ($valeurTokenServeur !== $valeurTokenUser) throw new AuthException("les tokens ne sont pas identiques");
             } catch (AuthException $e) {
                 $message = $e->getMessage();
-                $html = "<p> Problème avec la création du compte : $message </p>";
+                $html = "<p style='color:red'> Problème avec la création du compte : $message </p>";
             }
         } else {
             try {

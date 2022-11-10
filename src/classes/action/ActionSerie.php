@@ -15,7 +15,7 @@ class ActionSerie extends Action
     public function execute(): string
     {
         $html = " ";
-        if (isset($_SESSION['user'])) {
+        if (isset($_SESSION['id_user'])) {
             if (isset($_GET['id'])) {
 
                 $db = ConnectionFactory::makeConnection();
@@ -46,7 +46,7 @@ class ActionSerie extends Action
                     $renderEpisode = $renderer->render(1);
                     $html .= "<li><button formaction='index.php?action=episode&id_episode=$id_episode'>$renderEpisode</button></li>";
                 }
-                $id_user = unserialize($_SESSION['user'])->__get('id');
+                $id_user = $_SESSION['id_user'];
                 $id = $_GET['id'];
                 if (!isset($_GET['ajFav'])) {
                     if ($this->pasEnFavori($db, $id_user, $id)) {
@@ -85,6 +85,7 @@ class ActionSerie extends Action
                         }
                     }
                 }
+
                 $html .= "</form></ul>";
                 $html .= "<div id='infoSerie'>";
                 $id = $_GET['id'];
@@ -92,8 +93,17 @@ class ActionSerie extends Action
                     $nb=Serie::getNoteMoyenne($id).'/5';
                 }else $nb='non noté';
                 $html .= "Note moyenne : $nb <br>";
-                $html .= "<a href='index.php?action=commentaires&id=$id'>accéder aux commentaires</a>";
+                $option="&commentaires' >accéder aux";
+                $ajout='';
+                if (isset($_GET['commentaires'])){
+                    $act = new ActionCommentaires();
+                    $ajout .=$act->execute();
+                    $option = "' style='font-size: 2vw;' > retirer les";
+                }
+                $html .= "<a id='comLink' f href='index.php?action=serie&id=$id $option commentaires</a>";
                 $html .='</div>';
+
+                $html .= $ajout;
             }
         }
         return $html;

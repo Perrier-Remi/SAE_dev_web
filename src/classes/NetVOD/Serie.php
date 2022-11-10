@@ -43,6 +43,7 @@ class Serie
 
     public static function getNoteMoyenne(int $id):float{
         $db = ConnectionFactory::makeConnection();
+
         $query2 = "SELECT note FROM commentaires WHERE id_serie=?";
         $result2 = $db->prepare($query2);
         $result2->execute([$id]);
@@ -54,6 +55,11 @@ class Serie
             $nbNotes++;
         }
         if ($nbNotes==0) $nbNotes=1;
-        return round($retour/$nbNotes,1);
+        $retour = round($retour/$nbNotes,1);
+        $query2 = "UPDATE serie SET noteMoyenne = ? WHERE id=?";
+        $result2 = $db->prepare($query2);
+        $result2->execute([$retour,$id]);
+        echo "debug";
+        return $retour ;
     }
 }

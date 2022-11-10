@@ -7,6 +7,7 @@ require_once 'src/classes/bd/ConnectionFactory.php';
 
 use iutnc\netvod\bd\ConnectionFactory;
 use iutnc\netvod\NetVOD\Episode;
+use iutnc\netvod\NetVOD\Serie;
 use iutnc\netvod\render\RenderEpisode;
 
 class ActionEpisode extends Action
@@ -17,7 +18,7 @@ class ActionEpisode extends Action
         $html = "";
         if (!isset($_GET['id_episode'])) {
             $html .= "<div style=\"text-align:center\"><h3> Id Episode Manquant </h3> </div>";
-        } elseif (!isset($_SESSION['user'])) {
+        } elseif (!isset($_SESSION['id_user'])) {
             $html .= "<p> Utilisateur Non Connecté </p>";
         } else {
             try {
@@ -33,7 +34,7 @@ class ActionEpisode extends Action
                 $html .= "<div style=\"text-align:center\"><h3> Episode inconnu </h3> </div>";
             }
             $id_serie = $serie_stmt->fetch()[0];
-            $id_user = unserialize($_SESSION['user'])->__get('id');
+            $id_user = $_SESSION['id_user'];
             $stmt_encours = $db->prepare("INSERT INTO serieEnCours(id_user, id_serie) VALUES (?,?)");
             try {
                 $stmt_encours->execute([$id_user, $id_serie]);
@@ -77,6 +78,7 @@ class ActionEpisode extends Action
                         try {
                             $stmt_addComm->execute([$id_user, $id_serie, $_POST['note'], $comm]);
                             $html .= "<div style=\"text-align:center\"><h3> Commentaire ajouté ! </h3> </div> <br>";
+                            Serie::getNoteMoyenne($id_serie);
                         } catch (\Exception $e) {
                             $html .= "<div style=\"text-align:center\"><h3> Erreur dans l'ajout du commentaire </h3> </div> <br>";
                         }

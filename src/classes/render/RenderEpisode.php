@@ -2,7 +2,6 @@
 
 namespace iutnc\netvod\render;
 
-require_once 'src/classes/NetVOD/Episode.php';
 use iutnc\netvod\NetVOD\Episode;
 
 class RenderEpisode implements Renderer
@@ -28,7 +27,7 @@ class RenderEpisode implements Renderer
             $html = "<div style=\"text-align:center\"><h1>". $this->episode->__get('titre')." </h1></div> <br> <br>
              <div style=\"text-align:center\">". $this->episode->__get('resume')." </div> <br>
              <div style=\"text-align:center\">". $this->episode->__get('duree')." secondes </div> <br>
-             <div style=\"text-align:center\"> <video controls width='600'> <source src='video/". $this->episode->__get('cheminFich')."'> </video> </div>";
+             <div style=\"text-align:center\"> <video controls width='600'> <source src='video/". $this->episode->__get('cheminFich')."' id='currentEpisode'> </video> </div>";
         }
         return $html;
     }

@@ -10,6 +10,7 @@ class ActionSignIn extends Action
 
     public function execute(): string
     {
+        $html = "";
         if ($this->http_method === 'GET') {
             $html =
                 " <form id=\"f1\" method=\"post\" action='?action=sign-in'>
@@ -17,8 +18,8 @@ class ActionSignIn extends Action
             <input type=\"password\" placeholder=\"*****\" name=\"pswd\">
             <div style=\"text-align: center\"> 
             <button type=\"submit\" name=\"connexion\" value=\"vrai\"> Connexion </button> </div>
-            <a href='index.php?action=add-user'>s'inscrire</a>
-            <a href='index.php?action=mdp-oublie'>mot de passe oublié</a>
+            <p>pas de compte ? </p><a style='color:dodgerblue' href='index.php?action=add-user'>inscrivez-vous !</a>
+            <p>vous avez oublié votre mot de passe ? </p><a style='color:dodgerblue' href='index.php?action=mdp-oublie'>changez votre mot passe</a>
             </form>";
 
         } else {
