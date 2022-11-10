@@ -11,6 +11,7 @@ class ActionSignIn extends Action
     public function execute(): string
     {
         $html = "";
+
         if ($this->http_method === 'GET') {
             $html =
                 " <form id=\"f1\" method=\"post\" action='?action=sign-in'>
@@ -33,7 +34,11 @@ class ActionSignIn extends Action
                 $mail = $_POST['email'];
                 $password = $_POST['pswd'];
                 Auth::authenticate($mail, $password);
+                $_SESSION['co']='success';
                 $html = "<p> Connexion réussie </p>";
+                $act=new ActionLoadProfil();
+                $html.=$act->execute();
+                // ajout du texte de l action load profil
             } catch (AuthException $e) {
                 $message = $e->getMessage();
                 $html .= "<p>$message</p>";

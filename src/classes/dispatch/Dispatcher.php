@@ -16,6 +16,7 @@ use iutnc\netvod\action\ActionMotDePasseOublie;
 use iutnc\netvod\action\ActionMotDePasseOublieConfirmation;
 use iutnc\netvod\action\ActionProfil;
 use iutnc\netvod\action\ActionSerie;
+use iutnc\netvod\action\ActionLoadProfil;
 use iutnc\netvod\action\ActionSignIn as ActionSignIn;
 
 class Dispatcher
@@ -88,6 +89,11 @@ class Dispatcher
             case 'filtrer':
                 $act=new ActionFiltrer();
                 $this->renderPage($act->execute());
+                break;
+            case 'load-profil' :
+                $act=new ActionLoadProfil();
+                $this->renderPage($act->execute());
+                break;
             default:
                 $this->renderPage("<div style=\"text-align: center;\"> $this->action </div>");
                 break;
@@ -123,13 +129,12 @@ class Dispatcher
         </head>
         <body>
             <h1 id="GrandTitre">NETVOD</h1>
-            
            
             <form name='menu' id="menu" action="" method='get'>
                 <button id='premierBtn'class="btnsubmit" type="submit" name="action" value="accueil">Accueil</button>
                 <button class="btnsubmit" type="submit" name="action" value="catalogue">Catalogue</button>
-                <button class="btnsubmit" type="submit" name="action" value="deconnecter">Déconnexion</button>
-                <button  id="dernierBtn" class="btnsubmit" type="submit" name="action" value="profil">Profil</button>
+                <button class="btnsubmit" type="submit" name="action" value="profil">Profil</button>
+                <button id="dernierBtn" class="btnsubmit" type="submit" name="action" value="deconnecter">Déconnexion</button>
             </form>
             $btnRetour
             <br>

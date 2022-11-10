@@ -49,7 +49,7 @@ class ActionProfil extends Action
                 $new_GenresPrefs = rtrim($new_GenresPrefs, ",");
 
                 // Sauvegarde les paramètres rentrés
-                $stmt_newInfo = $db->prepare("UPDATE user SET nom = ?, prenom = ?, genre = ?, genresPref = ? WHERE id = ?;");
+                $stmt_newInfo = $db->prepare("UPDATE profils SET nom = ?, prenom = ?, genre = ?, genresPref = ? WHERE id_user = ?;");
                 try {
                     $stmt_newInfo->execute([$new_nom, $new_prenom, $new_genre, $new_GenresPrefs, $_SESSION['id_user']]);
                 } catch (\Exception $e) {
