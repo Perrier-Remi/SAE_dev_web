@@ -11,11 +11,12 @@ class ActionProfil extends Action
     public function execute(): string
     {
         $html = "";
-        if (isset($_SESSION['user'])) {
+        if (isset($_SESSION['id_user'])) {
 
             try {
                 $db = ConnectionFactory::makeConnection();
             } catch (\Exception $e) {
+                $message = $e->getMessage();
                 $html .= "<p> Connection à la base de données impossible</p>";
             }
 
@@ -50,7 +51,7 @@ class ActionProfil extends Action
                 // Sauvegarde les paramètres rentrés
                 $stmt_newInfo = $db->prepare("UPDATE user SET nom = ?, prenom = ?, genre = ?, genresPref = ? WHERE id = ?;");
                 try {
-                    $stmt_newInfo->execute([$new_nom, $new_prenom, $new_genre, $new_GenresPrefs, unserialize($_SESSION['user'])->__get('id')]);
+                    $stmt_newInfo->execute([$new_nom, $new_prenom, $new_genre, $new_GenresPrefs, $_SESSION['id_user']]);
                 } catch (\Exception $e) {
                     $html .= "<div style=\"text-align:center\"><h3> Erreur dans la requête SQL </h3> </div> <br>";
                 }

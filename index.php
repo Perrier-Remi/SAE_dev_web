@@ -14,7 +14,7 @@ if (isset($_GET['action'])) {
     $action = "";
 }
 
-if (!isset($_SESSION['user']) && $action != 'add-user' && $action != 'mdp-oublie' && $action != 'mdp-oublie-confirmation' && $action != 'confirmer-inscription'){
+if (!isset($_SESSION['id_user']) && $action != 'add-user' && $action != 'mdp-oublie' && $action != 'mdp-oublie-confirmation' && $action != 'confirmer-inscription'){
     $action = 'sign-in';
 }else{
     $_SESSION['list_url'][]= $_SERVER['QUERY_STRING'];
