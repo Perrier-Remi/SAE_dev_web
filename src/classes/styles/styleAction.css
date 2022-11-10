@@ -1,3 +1,21 @@
+@font-face
+{
+    font-family:Akira;
+    src:url('AkiraExpanded.otf');
+}
+
+@font-face
+{
+    font-family:Avenir;
+    src:url('Avenir-Medium.otf');
+}
+
+@font-face
+{
+    font-family:Mark;
+    src:url('Mark-Heavy.ttf');
+}
+
 body
 {
     background-image:url("img.png");
@@ -13,6 +31,7 @@ h1 {
     font-size: 5vw;
     margin-top: 3%;
     text-align: center;
+    font-family: Akira;
 }
 #GrandTitre{
     user-select: none;
