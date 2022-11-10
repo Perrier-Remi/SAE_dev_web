@@ -8,11 +8,7 @@ CREATE TABLE `user` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `email` varchar(50) NOT NULL,
     `passhash` varchar(100) NOT NULL,
-    nom varchar(100),
-    prenom varchar(100),
-    genre varchar(100),
-    genresPref varchar(500),
-     PRIMARY KEY (`id`)
+     PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `user` (`id`, `email`, `passhash`) VALUES (1, 'user1@mail.com', '$2y$12$e9DCiDKOGpVs9s.9u2ENEOiq7wGvx7sngyhPvKXo2mUbI3ulGWOdC');
@@ -113,3 +109,13 @@ CREATE TABLE commentaires (
 
 ALTER TABLE commentaires ADD FOREIGN KEY (id_user) REFERENCES user(id);
 ALTER TABLE commentaires ADD FOREIGN KEY (id_serie) REFERENCES serie(id);
+
+DROP TABLE IF EXISTS `profils`;
+CREATE TABLE profils (
+    email varchar(50) NOT NULL,
+    id_user int(11) NOT NULL,
+    nom varchar(100),
+    prenom varchar(100),
+    genre varchar(100),
+    genresPref varchar(500),
+    PRIMARY KEY(email,id_user))ENGINE=InnoDB DEFAULT CHARSET=utf8;

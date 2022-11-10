@@ -84,6 +84,10 @@ class Dispatcher
                 $act=new ActionMotDePasseOublieConfirmation();
                 $this->renderPage($act->execute());
                 break;
+            case 'load-profil' :
+                $act=new ActionLoadProfil();
+                $this->renderPage($act->execute());
+                break;
             default:
                 $this->renderPage("<div style=\"text-align: center;\"> Bonjour par defaut! </div>");
                 break;

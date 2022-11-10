@@ -15,7 +15,8 @@ if (isset($_GET['action'])) {
 }
 
 if (!isset($_SESSION['user']) && $action != 'add-user' && $action != 'mdp-oublie' && $action != 'mdp-oublie-confirmation' && $action != 'confirmer-inscription'){
-    $action = 'sign-in';
+    if ($_SESSION['co']=='succes') $action='load_profil';
+    else $action = 'sign-in';
 }else{
     $_SESSION['list_url'][]= $_SERVER['QUERY_STRING'];
     if (count($_SESSION['list_url'])>8) array_shift($_SESSION['list_url']);

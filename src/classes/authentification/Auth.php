@@ -44,7 +44,7 @@ class Auth
 
         if (!$userDB) throw new AuthException("profile not found");
         $user = new User($email, $userDB['passhash'], $userDB['id']);
-        $_SESSION['user'] = serialize($user);
+        $_SESSION['email'] = $email;
     }
 
     public static function checkAccessLevel (int $required): void
