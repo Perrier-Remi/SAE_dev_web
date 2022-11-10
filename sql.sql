@@ -5,10 +5,14 @@ SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-                        `id` int(11) NOT NULL AUTO_INCREMENT,
-                        `email` varchar(50) NOT NULL,
-                        `passhash` varchar(100) NOT NULL,
-                        PRIMARY KEY (`id`)
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `email` varchar(50) NOT NULL,
+    `passhash` varchar(100) NOT NULL,
+    nom varchar(100),
+    prenom varchar(100),
+    genre varchar(100),
+    genresPref varchar(500),
+     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `user` (`id`, `email`, `passhash`) VALUES (1, 'user1@mail.com', '$2y$12$e9DCiDKOGpVs9s.9u2ENEOiq7wGvx7sngyhPvKXo2mUbI3ulGWOdC');
@@ -74,17 +78,22 @@ CREATE TABLE `serie` (
                          `annee` int(11) NOT NULL,
                          `date_ajout` date NOT NULL,
                          noteMoyenne DECIMAL (4,2) DEFAULT 0,
+                         `genre` varchar(128) NOT NULL,
+                         `public` varchar(128) NOT NULL,
                          PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `serie` (`id`, `titre`, `descriptif`, `img`, `annee`, `date_ajout`) VALUES
-                                                                                    (1,	'Le lac aux mystères',	'C\'est l\'histoire d\'un lac mystérieux et plein de surprises. La série, bluffante et haletante, nous entraine dans un labyrinthe d\'intrigues époustouflantes. A ne rater sous aucun prétexte !',	'',	2020,	'2022-10-30'),
-                                                                                    (2,	'L\'eau a coulé',	'Une série nostalgique qui nous invite à revisiter notre passé et à se remémorer tout ce qui s\'est passé depuis que tant d\'eau a coulé sous les ponts.',	'',	1907,	'2022-10-29'),
-(3,	'Chevaux fous',	'Une série sur la vie des chevals sauvages en liberté. Décoiffante.',	'',	2017,	'2022-10-31'),
-(4,	'A la plage',	'Le succès de l\'été 2021, à regarder sans modération et entre amis.',	'',	2021,	'2022-11-04'),
-                                                                                    (5,	'Champion',	'La vie trépidante de deux champions de surf, passionnés dès leur plus jeune age. Ils consacrent leur vie à ce sport. ',	'',	2022,	'2022-11-03'),
-                                                                                    (6,	'Une ville la nuit',	'C\'est beau une ville la nuit, avec toutes ces voitures qui passent et qui repassent. La série suit un livreur, un chauffeur de taxi, et un insomniaque. Tous parcourent la grande ville une fois la nuit venue, au volant de leur véhicule.',	'',	2017,	'2022-10-31');
+INSERT INTO `serie` (`id`, `titre`, `descriptif`, `img`, `annee`, `date_ajout`,`genre`,`public`) VALUES
+                                                                                    (1,	'Le lac aux mystères',	'C\'est l\'histoire d\'un lac mystérieux et plein de surprises. La série, bluffante et haletante, nous entraine dans un labyrinthe d\'intrigues époustouflantes. A ne rater sous aucun prétexte !',	'',	2020,	'2022-10-30','action','tout public'),
+                                                                                    (2,	'L\'eau a coulé',	'Une série nostalgique qui nous invite à revisiter notre passé et à se remémorer tout ce qui s\'est passé depuis que tant d\'eau a coulé sous les ponts.',	'',	1907,	'2022-10-29','thriller','adulte'),
+(3,	'Chevaux fous',	'Une série sur la vie des chevals sauvages en liberté. Décoiffante.',	'',	2017,	'2022-10-31','aventure','tout public'),
+(4,	'A la plage',	'Le succès de l\'été 2021, à regarder sans modération et entre amis.',	'',	2021,	'2022-11-04','action','tout public'),
+                                                                                    (5,	'Champion',	'La vie trépidante de deux champions de surf, passionnés dès leur plus jeune age. Ils consacrent leur vie à ce sport. ',	'',	2022,	'2022-11-03','aventure','tout public'),
+                                                                                    (6,	'Une ville la nuit',	'C\'est beau une ville la nuit, avec toutes ces voitures qui passent et qui repassent. La série suit un livreur, un chauffeur de taxi, et un insomniaque. Tous parcourent la grande ville une fois la nuit venue, au volant de leur véhicule.',	'',	2017,	'2022-10-31','horreur','adulte');
 
+
+ALTER TABLE userAime ADD FOREIGN KEY (id_user) REFERENCES user(id);
+ALTER TABLE userAime ADD FOREIGN KEY (id_serie) REFERENCES serie(id);
 
 DROP TABLE IF EXISTS `serieEnCours`;
 CREATE TABLE `serieEnCours` (
@@ -92,6 +101,19 @@ CREATE TABLE `serieEnCours` (
   `id_serie` int(11) NOT NULL,
   PRIMARY KEY (`id_user`, `id_serie`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE serieEnCours ADD FOREIGN KEY (id_user) REFERENCES user(id);
+ALTER TABLE serieEnCours ADD FOREIGN KEY (id_serie) REFERENCES serie(id);
+
+DROP TABLE IF EXISTS `serieDejaVisionnee`;
+CREATE TABLE `serieDejaVisionnee` (
+  `id_user` int(11) NOT NULL,
+  `id_serie` int(11) NOT NULL,
+  PRIMARY KEY (`id_user`, `id_serie`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE serieDejaVisionnee ADD FOREIGN KEY (id_user) REFERENCES user(id);
+ALTER TABLE serieDejaVisionnee ADD FOREIGN KEY (id_serie) REFERENCES serie(id);
 
 DROP TABLE IF EXISTS `commentaires`;
 CREATE TABLE commentaires (
@@ -101,12 +123,18 @@ CREATE TABLE commentaires (
     commentaire VARCHAR(500),
     PRIMARY KEY(id_user,id_serie));
 
-DROP TABLE IF EXISTS `profils`;
-CREATE TABLE profils (
-    email varchar(50) NOT NULL,
-    id_user int(11) NOT NULL,
-    nom varchar(100),
-    prenom varchar(100),
-    genre varchar(100),
-    genresPref varchar(500),
-    PRIMARY KEY(email,id_user));
+ALTER TABLE commentaires ADD FOREIGN KEY (id_user) REFERENCES user(id);
+ALTER TABLE commentaires ADD FOREIGN KEY (id_serie) REFERENCES serie(id);
+
+DROP TABLE IF EXISTS `episodeEnCours`;
+CREATE TABLE `episodeEnCours` (
+  `id_user` int(11) NOT NULL,
+  `id_serie` int(11) NOT NULL,
+  id_episode int(11) NOT NULL,
+  actuel boolean NOT NULL,
+  PRIMARY KEY (`id_user`, `id_serie`, id_episode)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE episodeEnCours ADD FOREIGN KEY (id_user) REFERENCES user(id);
+ALTER TABLE episodeEnCours ADD FOREIGN KEY (id_serie) REFERENCES serie(id);
+ALTER TABLE episodeEnCours ADD FOREIGN KEY (id_episode) REFERENCES episode(id);
