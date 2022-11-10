@@ -6,12 +6,14 @@ use iutnc\netvod\action\ActionAjouterFavoris;
 use iutnc\netvod\action\ActionCatalogue;
 use iutnc\netvod\action\AccueilAction;
 use iutnc\netvod\action\ActionChercher;
-use iutnc\netvod\action\ActionConfirmationInscription;
+use iutnc\netvod\action\ActionInscriptionConfirmation;
+use iutnc\netvod\action\ActionInscription;
 use iutnc\netvod\action\ActionCommentaires;
 use iutnc\netvod\action\ActionDeconnecter;
 use iutnc\netvod\action\ActionEpisode;
+use iutnc\netvod\action\ActionMotDePasseOublie;
+use iutnc\netvod\action\ActionMotDePasseOublieConfirmation;
 use iutnc\netvod\action\ActionProfil;
-use iutnc\netvod\action\ActionInscription;
 use iutnc\netvod\action\ActionSerie;
 use iutnc\netvod\action\ActionSignIn as ActionSignIn;
 
@@ -59,7 +61,7 @@ class Dispatcher
                 $this->renderPage($act->execute());
                 break;
             case 'confirmer-inscription':
-                $act = new ActionConfirmationInscription();
+                $act = new ActionInscriptionConfirmation();
                 $this->renderPage($act->execute());
                 break;
             case 'commentaires':
@@ -72,6 +74,14 @@ class Dispatcher
                 break;
             case 'rechercher':
                 $act=new ActionChercher();
+                $this->renderPage($act->execute());
+                break;
+            case 'mdp-oublie':
+                $act=new ActionMotDePasseOublie();
+                $this->renderPage($act->execute());
+                break;
+            case 'mdp-oublie-confirmation' :
+                $act=new ActionMotDePasseOublieConfirmation();
                 $this->renderPage($act->execute());
                 break;
             default:
