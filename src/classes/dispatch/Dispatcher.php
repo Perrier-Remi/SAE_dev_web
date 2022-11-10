@@ -103,7 +103,7 @@ class Dispatcher
     public function renderPage(string $html): void
     {
         $btnRetour='';
-        if (isset($_GET['actio'])) {
+        if (isset($_GET['action'])) {
             if (isset($_GET['retour']) && $_GET['action'] != 'episode') {
                 array_pop($_SESSION['list_url']);
                 array_pop($_SESSION['list_url']);
