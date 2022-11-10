@@ -33,6 +33,7 @@ class ActionInscription extends Action {
                 $password = $_POST['pswd'];
                 $password_confirm = $_POST['pswd_confirm'];
 
+                Auth::verifierCompteExistePas($mail);
                 Auth::checkCredentials($mail, $password, $password_confirm);
                 $_SESSION['email_inscription'] = $mail;
                 $_SESSION['hash_mdp_inscription']= password_hash($password, PASSWORD_DEFAULT, ['cost' => 12]);
@@ -42,10 +43,10 @@ class ActionInscription extends Action {
                 $tokenServeur = $dateExpiration."|".$chaineAleatoire;
                 $_SESSION['token_inscription'] = $tokenServeur;
 
-                $html = "<form method='POST'><button formaction='index.php?action=confirmer-inscription&token=$tokenServeur'>confirmer l'inscription</button></form>";
+                $html = "<p>cliquez sur ce lien pour confirmer l'inscription : </p><a style='color:dodgerblue' href='index.php?action=confirmer-inscription&token=$tokenServeur'>confirmer l'inscription</a>";
             } catch (AuthException $e) {
                 $message = $e->getMessage();
-                $html = "<p> Problème avec la création du compte : $message </p>";
+                $html = "<p style='color:red'> Problème avec la création du compte : $message </p>";
             }
         }
         return $html;

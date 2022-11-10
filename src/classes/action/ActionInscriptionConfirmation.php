@@ -4,17 +4,13 @@ namespace iutnc\netvod\action;
 
 use iutnc\netvod\authentification\Auth;
 use iutnc\netvod\exception\AuthException;
-use iutnc\netvod\NetVOD\Serie;
-use iutnc\netvod\render\RenderSerie;
-use iutnc\netvod\bd\ConnectionFactory;
 
-class ActionConfirmationInscription extends Action
+class ActionInscriptionConfirmation extends Action
 {
 
     public function execute(): string
     {
-        $html = "";
-        if ($this->http_method === 'POST') {
+        if ($this->http_method === 'GET') {
             try {
                 if (!filter_var($_GET['token'], FILTER_SANITIZE_STRING)) {
                     throw new AuthException("token invalide");
@@ -33,10 +29,10 @@ class ActionConfirmationInscription extends Action
                 if ($valeurTokenServeur !== $valeurTokenUser) throw new AuthException("les tokens ne sont pas identiques");
 
                 Auth::register($_SESSION['email_inscription'], $_SESSION['hash_mdp_inscription']);
-                $html = "<p>Compte vérifié avec succès</p>";
+                $html = "<p style='color:green'>Compte vérifié avec succès</p>";
             } catch (AuthException $e) {
                 $message = $e->getMessage();
-                $html = "<p> Problème avec la confirmation du compte : $message </p>";
+                $html = "<p style='color:red'> Problème avec la confirmation du compte : $message </p>";
             }
         }
         return $html;    }
