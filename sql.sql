@@ -77,6 +77,7 @@ CREATE TABLE `serie` (
                          `img` varchar(256) NOT NULL,
                          `annee` int(11) NOT NULL,
                          `date_ajout` date NOT NULL,
+                         noteMoyenne DECIMAL (4,2) DEFAULT 0,
                          PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
