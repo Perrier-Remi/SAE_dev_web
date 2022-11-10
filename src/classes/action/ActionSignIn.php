@@ -10,6 +10,7 @@ class ActionSignIn extends Action
 
     public function execute(): string
     {
+        $html = "";
         if ($this->http_method === 'GET') {
             $html =
                 " <form id=\"f1\" method=\"post\" action='?action=sign-in'>
