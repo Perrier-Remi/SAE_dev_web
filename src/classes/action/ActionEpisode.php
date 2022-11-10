@@ -132,8 +132,8 @@ class ActionEpisode extends Action
         }
 
         // Ajout du nouvel épisode
-        $stmt_episodeInListe = $db->prepare("SELECT COUNT(*) FROM episodeEnCours WHERE id_episode = ?");
-        $stmt_episodeInListe->execute([$_GET['id_episode']]);
+        $stmt_episodeInListe = $db->prepare("SELECT COUNT(*) FROM episodeEnCours WHERE id_episode = ? AND id_user = ?");
+        $stmt_episodeInListe->execute([$_GET['id_episode'],$id_user]);
         // Si l'episode n'a jamais été regardé
         if ($stmt_episodeInListe->fetch()[0] === 0) {
             $stmt_episode = $db->prepare("INSERT INTO episodeEnCours(id_user, id_serie, id_episode, actuel) VALUES (?,?,?,?)");
@@ -164,8 +164,8 @@ class ActionEpisode extends Action
         $stmt_nbEpSerie->execute([$id_serie]);
         $nbEpSerie = $stmt_nbEpSerie->fetch()[0];
         // Nombre d'épisodes de la série déjà vus
-        $stmt_nbEpVus = $db->prepare("SELECT COUNT(*) FROM episodeEnCours WHERE id_serie = ?");
-        $stmt_nbEpVus->execute([$id_serie]);
+        $stmt_nbEpVus = $db->prepare("SELECT COUNT(*) FROM episodeEnCours WHERE id_serie = ? AND id_user = ?");
+        $stmt_nbEpVus->execute([$id_serie,$id_user]);
         $nbEpVus = $stmt_nbEpVus->fetch()[0];
 
         // Si la série est complétée et tous les épisodes visionnés, la mettre dans la table serieDejaVisionnee
