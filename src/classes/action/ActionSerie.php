@@ -29,7 +29,7 @@ class ActionSerie extends Action
                 $query3 = "SELECT * FROM episode WHERE serie_id=?";
                 $stmt = $db->prepare($query3);
                 $stmt->execute([$_GET['id']]);
-                $html .= "<form id='accueil' method='post' enctype='multipart/form-data' action = ''>";
+                $html .= "<form id='accueil' class='episode' method='post' enctype='multipart/form-data' action = ''>";
 
 
                     while ($datas = $stmt->fetch()) {
@@ -50,14 +50,14 @@ class ActionSerie extends Action
                 $id = $_GET['id'];
                 if (!isset($_GET['ajFav'])) {
                     if ($this->pasEnFavori($db, $id_user, $id)) {
-                        $html .= "<button formaction='index.php?action=serie&id=$id&ajFav=NONE'>Ajouter au favoris</button>";
+                        $html .= "<button class='btnFav' formaction='index.php?action=serie&id=$id&ajFav=NONE'>Ajouter au favoris</button>";
                     } else {
-                        $html .= "<button formaction='index.php?action=serie&id=$id&ajFav=OK'>Supprimer au favoris</button>";
+                        $html .= "<button class='btnFav' formaction='index.php?action=serie&id=$id&ajFav=OK'>Supprimer au favoris</button>";
                     }
                 } else if (($this->pasEnFavori($db, $id_user, $id) && $_GET['ajFav'] != 'NONE') || ($_GET['ajFav'] == 'OK')) {
-                    $html .= "<button formaction='index.php?action=serie&id=$id&ajFav=NONE'>Ajouter au favoris</button>";
+                    $html .= "<button class='btnFav' formaction='index.php?action=serie&id=$id&ajFav=NONE'>Ajouter au favoris</button>";
                 } else {
-                    $html .= "<button formaction='index.php?action=serie&id=$id&ajFav=OK'>Supprimer au favoris</button>";
+                    $html .= "<button class='btnFav' formaction='index.php?action=serie&id=$id&ajFav=OK'>Supprimer au favoris</button>";
                 }
 
                 if (isset($_GET['ajFav'])) {
@@ -85,13 +85,15 @@ class ActionSerie extends Action
                         }
                     }
                 }
-                $html .= "</form></center></ul>";
+                $html .= "</form></ul>";
+                $html .= "<div id='infoSerie'>";
                 $id = $_GET['id'];
                 if (Serie::getNoteMoyenne($id)>0){
                     $nb=Serie::getNoteMoyenne($id).'/5';
                 }else $nb='non noté';
-                $html .= "Note moyenne :$nb <br>";
+                $html .= "Note moyenne : $nb <br>";
                 $html .= "<a href='index.php?action=commentaires&id=$id'>accéder aux commentaires</a>";
+                $html .='</div>';
             }
         }
         return $html;

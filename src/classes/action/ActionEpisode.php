@@ -102,5 +102,5 @@ class ActionEpisode extends Action
                         <div style=\"text-align: center\"> 
                         <button type=\"submit\" name=\"commentaire\" value=\"vrai\"> Valider </button> </div>
                         </form>";
-    }
+    } // changer notation
 }

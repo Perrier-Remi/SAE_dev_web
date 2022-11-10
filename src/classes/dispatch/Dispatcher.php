@@ -92,7 +92,7 @@ class Dispatcher
             $url = $_SESSION['list_url'][count($_SESSION['list_url'])-2];
             if ($url==""){$url = 'index.php?'.$_SERVER['QUERY_STRING'];}
             $btnRetour.="<form method='post'>";
-            $btnRetour.="<button formaction='index.php?$url&retour' >Retour</button>";
+            $btnRetour.="<button id='btnRetour' formaction='index.php?$url&retour' ><img src='src/classes/styles/retour.png'></button>";
             $btnRetour.="</form>";
         }
         print(
@@ -104,19 +104,17 @@ class Dispatcher
         <link rel="stylesheet" type="text/css" href="src/classes/styles/styleAction.css"/> 
         </head>
         <body>
-            <h1>NETVOD</h1>
-            <form name='menu' action="" method='get'>
-
-                <button class="btnsubmit" type="submit" name="action" value="accueil">Accueil</button>
+            <h1 id="GrandTitre">NETVOD</h1>
+            
+           
+            <form name='menu' id="menu" action="" method='get'>
+                <button id='premierBtn'class="btnsubmit" type="submit" name="action" value="accueil">Accueil</button>
                 <button class="btnsubmit" type="submit" name="action" value="catalogue">Catalogue</button>
                 <button class="btnsubmit" type="submit" name="action" value="deconnecter">Se déconnecter</button>
-                <button class="btnsubmit" type="submit" name="action" value="profil">Profil</button>
-                
+                <button  id="dernierBtn" class="btnsubmit" type="submit" name="action" value="profil">Profil</button>
             </form>
-            <br>
-
             $btnRetour
-        
+            <br>
             $html
         </body>
         </html>

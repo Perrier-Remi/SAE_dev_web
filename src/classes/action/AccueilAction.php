@@ -13,7 +13,7 @@ class AccueilAction extends Action
     public function execute(): string
     {
         $retour = <<<end
-                <h3>Séries que vous avez aimé</h3>
+                <h2>Séries que vous avez aimé</h2>
                 <center>
                 <ul>
                end;
@@ -23,7 +23,7 @@ class AccueilAction extends Action
             $result = $db->prepare($query);
             $user = unserialize($_SESSION['user']);
             $result->execute([$user->__get('id')]);
-            $retour .= "<form id='accueil' method='post' enctype='multipart/form-data' action = ''>";
+            $retour .= "<form id='accueil' class='serie' method='post' enctype='multipart/form-data' action = ''>";
             while($datas = $result->fetch(\PDO::FETCH_ASSOC)) {
                 // creer series
                 $id_serie = $datas['id_serie'];

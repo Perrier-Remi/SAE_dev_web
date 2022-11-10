@@ -8,22 +8,85 @@ body
     text-align: center;
 }
 
-h1
-{
-    color:red;
-    font-size:5vw;
-    margin-top:3%;
+h1 {
+    color: red;
+    font-size: 5vw;
+    margin-top: 3%;
+    text-align: center;
+}
+#GrandTitre{
+    user-select: none;
+    text-shadow: 0 0 60px rgba(255,255,255,.5);
+
+    /* Clip Background Image */
+
+    background: url('animated-text-fill.png') repeat-y;
+    -webkit-background-clip: text;
+
+
+    /* Animate Background Image */
+
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: aitf 80s linear infinite;
+
+    /* Activate hardware acceleration for smoother animations */
+
+    -webkit-transform: translate3d(0,0,0);
+    -webkit-backface-visibility: hidden;
+
+}
+
+/* Animate Background Image */
+
+@-webkit-keyframes aitf {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+
+#btnRetour {
+    margin-left: 7%;
+    float: left;
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: 50%;
+    background-color: #bf0000;
+}
+
+#btnRetour > img {
+    horiz-align: left;
+    max-height: 40px;
+}
+
+#menu{
+    display: inline-flex;
+}
+
+h2 {
+    text-decoration: underline;
+    user-select: none;
 }
 
 .btnsubmit
 {
     background-color: #bf0000;
+    min-width: 150px;
     padding:1% 1% 1% 1%;
-    margin:15px 2% 15px 2%;
+    margin:15px 0 0 0;/*15px 2% 15px 2%;*/
     color:white;
-    border:0px;
+    border-width: 0px 0px 0px 2px;
     font-size:1.4vw;
 
+}
+#premierBtn
+{
+    border-left-width: 0px;
+    border-radius: 20% 0 0 20%;
+}
+
+#dernierBtn
+{
+    border-radius: 0 20% 20% 0;
 }
 
 #f1 input
@@ -58,11 +121,18 @@ h1
     padding:1.5vh 1.5% 1.5vh 1.5%;
 }
 
-#f1 a:hover, #f1 button:hover, .btnsubmit:hover, #accueil li button:hover
+#f1 a:hover, #f1 button:hover, .btnsubmit:hover, .episode > li > button:hover
 {
     text-decoration:underline;
     cursor: pointer;
 }
+
+.serie > li > button:hover
+{
+    text-decoration: none;
+    cursor: pointer;
+}
+
 
 #accueil li
 {
@@ -73,6 +143,7 @@ h1
 #accueil li button
 {
     margin:0.5% 2% 0.5% 2%;
+    align-items: center;
     text-align:left;
     font-size:2vw;
     width:50vw;
@@ -84,6 +155,11 @@ h1
 {
     horiz-align: left;
     max-height:15vh;
+}
+
+#accueil{
+    display: flex;
+    flex-direction: column;
 }
 
 #txtbtn
@@ -113,7 +189,7 @@ h1
 {
     width:50vw;
     margin:auto;
-    text-align: left;
+    text-align: center;
     padding:3vh 0 3vh 0;
     font-size: 2vw;
 }
@@ -142,6 +218,20 @@ h1
     cursor: pointer;
     background-color: #bf0000;
     color:white;
+}
+
+#infoSerie
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.btnFav
+{
+    margin: 10px auto;
+    width: 150px;
 }
 
 
