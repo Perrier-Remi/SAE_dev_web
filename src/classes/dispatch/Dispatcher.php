@@ -93,17 +93,21 @@ class Dispatcher
     public function renderPage(string $html): void
     {
         $btnRetour='';
-        if (isset($_GET['retour']) && $_GET['action']!='episode'){
-            array_pop($_SESSION['list_url']);
-            array_pop($_SESSION['list_url']);
-        }
-        if ($_GET['action']=='serie' || $_GET['action']=='episode'){
-            //$url = end($_SESSION['list_url']);
-            $url = $_SESSION['list_url'][count($_SESSION['list_url'])-2];
-            if ($url==""){$url = 'index.php?'.$_SERVER['QUERY_STRING'];}
-            $btnRetour.="<form method='post'>";
-            $btnRetour.="<button id='btnRetour' formaction='index.php?$url&retour' ><img src='src/classes/styles/retour.png'></button>";
-            $btnRetour.="</form>";
+        if (isset($_GET['actio'])) {
+            if (isset($_GET['retour']) && $_GET['action'] != 'episode') {
+                array_pop($_SESSION['list_url']);
+                array_pop($_SESSION['list_url']);
+            }
+            if ($_GET['action'] == 'serie' || $_GET['action'] == 'episode') {
+                //$url = end($_SESSION['list_url']);
+                $url = $_SESSION['list_url'][count($_SESSION['list_url']) - 2];
+                if ($url == "") {
+                    $url = 'index.php?' . $_SERVER['QUERY_STRING'];
+                }
+                $btnRetour .= "<form method='post'>";
+                $btnRetour .= "<button id='btnRetour' formaction='index.php?$url&retour' ><img src='src/classes/styles/retour.png'></button>";
+                $btnRetour .= "</form>";
+            }
         }
         print(
         <<<end

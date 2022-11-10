@@ -103,6 +103,16 @@ CREATE TABLE `serieEnCours` (
 ALTER TABLE serieEnCours ADD FOREIGN KEY (id_user) REFERENCES user(id);
 ALTER TABLE serieEnCours ADD FOREIGN KEY (id_serie) REFERENCES serie(id);
 
+DROP TABLE IF EXISTS `serieDejaVisionnee`;
+CREATE TABLE `serieEnCours` (
+  `id_user` int(11) NOT NULL,
+  `id_serie` int(11) NOT NULL,
+  PRIMARY KEY (`id_user`, `id_serie`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE serieDejaVisionnee ADD FOREIGN KEY (id_user) REFERENCES user(id);
+ALTER TABLE serieDejaVisionnee ADD FOREIGN KEY (id_serie) REFERENCES serie(id);
+
 DROP TABLE IF EXISTS `commentaires`;
 CREATE TABLE commentaires (
     id_user INT,
@@ -113,3 +123,16 @@ CREATE TABLE commentaires (
 
 ALTER TABLE commentaires ADD FOREIGN KEY (id_user) REFERENCES user(id);
 ALTER TABLE commentaires ADD FOREIGN KEY (id_serie) REFERENCES serie(id);
+
+DROP TABLE IF EXISTS `episodeEnCours`;
+CREATE TABLE `serieEnCours` (
+  `id_user` int(11) NOT NULL,
+  `id_serie` int(11) NOT NULL,
+  id_episode int(11) NOT NULL,
+  actuel bool NOT NULL,
+  PRIMARY KEY (`id_user`, `id_serie`, id_episode)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE episodeEnCours ADD FOREIGN KEY (id_user) REFERENCES user(id);
+ALTER TABLE episodeEnCours ADD FOREIGN KEY (id_serie) REFERENCES serie(id);
+ALTER TABLE episodeEnCours ADD FOREIGN KEY (id_episode) REFERENCES episode(id);
