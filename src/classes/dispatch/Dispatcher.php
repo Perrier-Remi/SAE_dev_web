@@ -17,7 +17,7 @@ use iutnc\netvod\action\ActionMotDePasseOublieConfirmation;
 use iutnc\netvod\action\ActionProfil;
 use iutnc\netvod\action\ActionSerie;
 use iutnc\netvod\action\ActionLoadProfil;
-use iutnc\netvod\action\ActionSignIn as ActionSignIn;
+use iutnc\netvod\action\ActionSignIn;
 
 class Dispatcher
 {

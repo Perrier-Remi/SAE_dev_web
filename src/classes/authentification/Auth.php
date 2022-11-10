@@ -2,8 +2,8 @@
 
 namespace iutnc\netvod\authentification;
 
-use iutnc\netvod\exception\AuthException as AuthException;
-use iutnc\netvod\bd\ConnectionFactory as ConnectionFactory;
+use iutnc\netvod\exception\AuthException;
+use iutnc\netvod\bd\ConnectionFactory;
 
 class Auth
 {

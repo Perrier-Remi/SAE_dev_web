@@ -2,9 +2,6 @@
 
 namespace iutnc\netvod\action;
 
-require_once 'src/classes/NetVOD/Episode.php';
-require_once 'src/classes/bd/ConnectionFactory.php';
-
 use iutnc\netvod\bd\ConnectionFactory;
 use iutnc\netvod\NetVOD\Episode;
 use iutnc\netvod\NetVOD\Serie;
