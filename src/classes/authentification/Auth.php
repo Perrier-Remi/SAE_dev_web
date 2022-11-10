@@ -40,7 +40,8 @@ class Auth
         $userDB = $stmt->fetch(\PDO::FETCH_ASSOC);
 
         if (!$userDB) throw new AuthException("profile not found");
-        $_SESSION['id_user'] = $userDB['id'];
+        /*$_SESSION['id_user'] = $userDB['id'];*/
+        $_SESSION['email']=$email;
     }
 
     public static function checkPasswordStrength(string $pass, int $minimumLength):bool{

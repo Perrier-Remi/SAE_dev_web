@@ -15,7 +15,7 @@ if (isset($_GET['action'])) {
 }
 
 if (!isset($_SESSION['id_user']) && $action != 'add-user' && $action != 'mdp-oublie' && $action != 'mdp-oublie-confirmation' && $action != 'confirmer-inscription' && $action!='load-profil'){
-    if (isset($_SESSION['co'])){
+    if (isset($_SESSION['email'])){
         $action='load-profil';
     }else{
         $action = 'sign-in';

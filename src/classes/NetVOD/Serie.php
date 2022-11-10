@@ -61,7 +61,6 @@ class Serie
         $query2 = "UPDATE serie SET noteMoyenne = ? WHERE id=?";
         $result2 = $db->prepare($query2);
         $result2->execute([$retour,$id]);
-        echo "debug";
         return $retour ;
     }
 }
