@@ -15,7 +15,7 @@ class ActionSerie extends Action
     public function execute(): string
     {
         $html = " ";
-        if (isset($_SESSION['user'])) {
+        if (isset($_SESSION['id_user'])) {
             if (isset($_GET['id'])) {
 
                 $db = ConnectionFactory::makeConnection();
@@ -46,7 +46,7 @@ class ActionSerie extends Action
                     $renderEpisode = $renderer->render(1);
                     $html .= "<li><button formaction='index.php?action=episode&id_episode=$id_episode'>$renderEpisode</button></li>";
                 }
-                $id_user = unserialize($_SESSION['user'])->__get('id');
+                $id_user = $_SESSION['id_user'];
                 $id = $_GET['id'];
                 if (!isset($_GET['ajFav'])) {
                     if ($this->pasEnFavori($db, $id_user, $id)) {

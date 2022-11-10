@@ -5,10 +5,10 @@ SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
-    `email` varchar(50) NOT NULL,
-    `passhash` varchar(100) NOT NULL,
-     PRIMARY KEY (`email`)
+                        `id` int(11) NOT NULL AUTO_INCREMENT,
+                        `email` varchar(50) NOT NULL,
+                        `passhash` varchar(100) NOT NULL,
+                        PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `user` (`id`, `email`, `passhash`) VALUES (1, 'user1@mail.com', '$2y$12$e9DCiDKOGpVs9s.9u2ENEOiq7wGvx7sngyhPvKXo2mUbI3ulGWOdC');
@@ -86,18 +86,12 @@ INSERT INTO `serie` (`id`, `titre`, `descriptif`, `img`, `annee`, `date_ajout`) 
                                                                                     (6,	'Une ville la nuit',	'C\'est beau une ville la nuit, avec toutes ces voitures qui passent et qui repassent. La série suit un livreur, un chauffeur de taxi, et un insomniaque. Tous parcourent la grande ville une fois la nuit venue, au volant de leur véhicule.',	'',	2017,	'2022-10-31');
 
 
-ALTER TABLE userAime ADD FOREIGN KEY (id_user) REFERENCES user(id);
-ALTER TABLE userAime ADD FOREIGN KEY (id_serie) REFERENCES serie(id);
-
 DROP TABLE IF EXISTS `serieEnCours`;
 CREATE TABLE `serieEnCours` (
   `id_user` int(11) NOT NULL,
   `id_serie` int(11) NOT NULL,
   PRIMARY KEY (`id_user`, `id_serie`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-ALTER TABLE serieEnCours ADD FOREIGN KEY (id_user) REFERENCES user(id);
-ALTER TABLE serieEnCours ADD FOREIGN KEY (id_serie) REFERENCES serie(id);
 
 DROP TABLE IF EXISTS `commentaires`;
 CREATE TABLE commentaires (
@@ -107,9 +101,6 @@ CREATE TABLE commentaires (
     commentaire VARCHAR(500),
     PRIMARY KEY(id_user,id_serie));
 
-ALTER TABLE commentaires ADD FOREIGN KEY (id_user) REFERENCES user(id);
-ALTER TABLE commentaires ADD FOREIGN KEY (id_serie) REFERENCES serie(id);
-
 DROP TABLE IF EXISTS `profils`;
 CREATE TABLE profils (
     email varchar(50) NOT NULL,
@@ -118,4 +109,4 @@ CREATE TABLE profils (
     prenom varchar(100),
     genre varchar(100),
     genresPref varchar(500),
-    PRIMARY KEY(email,id_user))ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    PRIMARY KEY(email,id_user));

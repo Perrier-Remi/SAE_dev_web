@@ -17,12 +17,12 @@ class AccueilAction extends Action
                 <center>
                 <ul>
                end;
-        if (isset($_SESSION['user'])){
+        if (isset($_SESSION['id_user'])){
             $db = ConnectionFactory::makeConnection();
             $query ="SELECT * FROM useraime WHERE id_user=?";
             $result = $db->prepare($query);
-            $user = unserialize($_SESSION['user']);
-            $result->execute([$user->__get('id')]);
+
+            $result->execute([$_SESSION['id_user']]);
             $retour .= "<form id='accueil' class='serie' method='post' enctype='multipart/form-data' action = ''>";
             while($datas = $result->fetch(\PDO::FETCH_ASSOC)) {
                 // creer series
