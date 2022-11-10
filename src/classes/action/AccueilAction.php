@@ -54,13 +54,13 @@ class AccueilAction extends Action
             $render = new RenderSerie($serie);
             $data = $render->render();
             if (!$enCours) {
-                $retour .= "<li><button formaction='index.php?action=serie&id=$id_serie'>$data</button></li>";
+                $retour .= "<li><button id='fin' formaction='index.php?action=serie&id=$id_serie'>$data</button></li>";
             } else {
                 // Donne accès à l'épisode courant
                 $stmt = $db->prepare("SELECT id_episode FROM episodeEnCours WHERE id_serie = ? AND actuel = ?");
                 $stmt->execute([$id_serie, true]);
                 $id_episode = $stmt->fetch()[0];
-                $retour .= "<li><button formaction='index.php?action=episode&id_episode=$id_episode   '>$data</button></li>";
+                $retour .= "<li><button id='fin' formaction='index.php?action=episode&id_episode=$id_episode   '>$data</button></li>";
             }
         }
         $result->closeCursor();

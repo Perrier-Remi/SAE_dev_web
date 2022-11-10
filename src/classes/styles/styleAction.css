@@ -163,7 +163,7 @@ h2 {
     cursor: pointer;
 }
 
-.serie > li > button:hover
+.serie > li > button:hover , #fin
 {
     text-decoration: none;
     cursor: pointer;
@@ -176,7 +176,7 @@ h2 {
     vertical-align:center;
 }
 
-#accueil li button
+#accueil li button , #fin
 {
     margin:0.5% 2% 0.5% 2%;
     align-items: center;
@@ -188,7 +188,7 @@ h2 {
 }
 
 
-#accueil li button img
+#accueil > li > button > img, #fin > img
 {
     horiz-align: left;
     max-height:15vh;
@@ -290,6 +290,9 @@ h2 {
     text-decoration:underline;
 }
 
+.profil > img {
+    margin-right: 5px;
+}
 .profil
 {
     margin:10px 10px 10px 10px;

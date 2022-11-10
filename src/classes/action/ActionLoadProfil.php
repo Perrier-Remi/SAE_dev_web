@@ -41,33 +41,14 @@ class ActionLoadProfil extends Action
                     $entier++;
                 }
 
-                $tab = ['profils','useraime','serieDejaVisionnee','Commentaire','episodeEnCours','serieEnCours'];
+                $tab = ['profils','useraime','serieDejaVisionnee','Commentaires','episodeEnCours','serieEnCours'];
                 foreach ($tab as $data){
-                    $query_email = "DELETE FROM ? WHERE id_user = ?";
+                    $query_email = "DELETE FROM ".$data." WHERE id_user = ?";
                     $stmt = $db->prepare($query_email);
-                    $stmt->execute([$data,$res['id_user']]);
+                    $stmt->execute([$res['id_user']]);
                 }
             }
-            $html .= <<<end
-               <form method="post">
-                    <input type="submit" name="creation" value="Creer un profil" />
-                    <input type="submit" name="suppression" value="supprimer un profil" />
-            end;
-
-            $query_email = "select * from profils where email = ?";
-            $stmt = $db->prepare($query_email);
-            $stmt->execute([$_SESSION['email']]);
-            $stmt->setFetchMode(\PDO::FETCH_ASSOC);
-            $nb=1;
-            while ($data = $stmt->fetch()) {
-                $id=$data['id_user'];
-                $nom=$data['nom'];
-                $prenom=$data['prenom'];
-                $html.="<button type='submit' name='button$nb' value='$id'>Profil $nb : $nom $prenom</button>";
-                $nb++;
-            }
-            $html .= "</form>";
-            if(array_key_exists('button1', $_POST)) {
+            else if(array_key_exists('button1', $_POST)) {
                 $_SESSION['id_user']=$_POST['button1'];
                 $html.='profil selectionné';
             }
@@ -83,7 +64,28 @@ class ActionLoadProfil extends Action
                 $_SESSION['id_user']=$_POST['button4'];
                 $html.='profil selectionné';
             }
-            else if(array_key_exists('creation', $_POST)) {
+            $html .= <<<end
+               <form method="post">
+                    <input type="submit" name="creation" value="Creer un profil" />
+                    <input type="submit" name="suppression" value="supprimer un profil" /><br>
+            end;
+
+            $query_email = "select * from profils where email = ?";
+            $stmt = $db->prepare($query_email);
+            $stmt->execute([$_SESSION['email']]);
+            $stmt->setFetchMode(\PDO::FETCH_ASSOC);
+            $nb=1;
+            $desactivation = '';
+            if (isset($_SESSION['id_user'])) $desactivation='disabled';
+            while ($data = $stmt->fetch()) {
+                $id=$data['id_user'];
+                $nom=$data['nom'];
+                $prenom=$data['prenom'];
+                $html.="<button class='profil' type='submit' name='button$nb' value='$id'".$desactivation."><img class='profile' src='src/classes/styles/cadre-photo.png'>Profil $nb : $nom $prenom</button>";
+                $nb++;
+            }
+            $html .= "</form>";
+            if(array_key_exists('creation', $_POST)) {
                 if ($nb>4){
                     $html.='on ne peut pas ajouter de nouveau profils';
                 }else{
