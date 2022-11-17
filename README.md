@@ -51,7 +51,7 @@ To easily navigate series, you can search a serie by key word which will be rese
 You can also filter results by genre, title, year or average mark.
 <br />
 
-#### About
+## About
 The project was build by Rémi Perrier, Yann Mijatovic, Théo Pinchon, Naël Guenfoudi and Thomas De Kersabiec
 <br />
 
